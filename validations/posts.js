@@ -9,11 +9,6 @@ module.exports.post = {
       .label('Title')
       .trim()
       .required(),
-    author: Joi.string()
-      .max(63)
-      .label('Author')
-      .trim()
-      .required(),
     imageUrl: Joi.string()
       .label('Image url')
       .trim()
