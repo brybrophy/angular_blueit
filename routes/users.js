@@ -23,28 +23,9 @@ const checkAuth = function(req, res, next) {
 router.post('/users', ev(validations.post), (req, res, next) => {
   const { username, password, firstName, lastName} = req.body;
 
-  if (!userName || !userName.trim()) {
-    return next(boom.create(400, 'Username must not be blank'));
-  }
-
-  if (!password || !password.trim()) {
-    return next(boom.create(400, 'Password must not be blank'));
-  }
-
-  if (!firstName || !firstName.trim()) {
-    return next(boom.create(400, 'First name must not be blank'));
-  }
-
-  if (!lastName || !lastName.trim()) {
-    return next(boom.create(400, 'Last name must not be blank'));
-  }
-
-  const newUser = { username, password, firstName, lastName };
-  const row = camelizeKeys(newUser);
-
   knex('users')
     .select(knex.raw('1=1'))
-    .where('username', userName)
+    .where('username', username)
     .first()
     .then((exists) => {
       if (exists) {
@@ -52,9 +33,17 @@ router.post('/users', ev(validations.post), (req, res, next) => {
       }
 
       return bcrypt.hash(password, 12);
+
     })
-    .then((hashed_password) => knex('users').insert({ row }, '*')
+    .then((hashedPassword) => {
+      const newUser = { username, hashedPassword, firstName, lastName };
+      const row = decamelizeKeys(newUser);
+
+      return knex('users').insert(row, '*')
+    })
     .then((newUsers) => {
+      delete newUsers[0].hashedPassword;
+
       req.session.userId = newUsers[0].id;
       res.cookie('loggedIn', true);
       res.sendStatus(200);
@@ -64,4 +53,4 @@ router.post('/users', ev(validations.post), (req, res, next) => {
     });
 });
 
-module.exports = Router;
+module.exports = router;

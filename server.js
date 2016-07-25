@@ -11,14 +11,24 @@ const port = process.env.PORT || 8000;
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
+const morgan = require('morgan');
 
 const app = express();
 
+const users = require('./routes/users');
+
 app.disable('x-powered-by');
 
-if (process.env.NODE_ENV !== 'test') {
-  const morgan = require('morgan');
-  app.use(morgan('short'));
+switch (app.get('env')) {
+  case 'development':
+    app.use(morgan('dev'));
+    break;
+
+  case 'production':
+    app.use(morgan('short'));
+    break;
+
+  default:
 }
 
 app.use(bodyParser.json());
@@ -28,9 +38,7 @@ app.use(cookieSession({
   secret: process.env.SESSION_SECRET
 }));
 
-
-
-app.use(express.static(path.join('public')));
+app.use(users)
 
 app.use((_req, res) => {
   res.sendStatus(404);
