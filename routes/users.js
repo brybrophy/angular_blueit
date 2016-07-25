@@ -12,14 +12,6 @@ const validations = require('../validations/users');
 const boom = require('boom');
 const { camelizeKeys, decamelizeKeys } = require('humps');
 
-const checkAuth = function(req, res, next) {
-  if (!req.session.userId) {
-    return next(boom.create(401, 'Unauthorized'));
-  }
-
-  next();
-};
-
 router.post('/users', ev(validations.post), (req, res, next) => {
   const { username, password, firstName, lastName} = req.body;
 
@@ -29,27 +21,28 @@ router.post('/users', ev(validations.post), (req, res, next) => {
     .first()
     .then((exists) => {
       if (exists) {
-        throw boom.create(409, 'Username already exists');
+        throw boom.conflict('Username already exists');
       }
 
       return bcrypt.hash(password, 12);
-
     })
     .then((hashedPassword) => {
       const newUser = { username, hashedPassword, firstName, lastName };
       const row = decamelizeKeys(newUser);
 
-      return knex('users').insert(row, '*')
+      return knex('users').insert(row, '*');
     })
     .then((newUsers) => {
-      delete newUsers[0].hashedPassword;
+      delete newUsers[0].hashed_password;
+      delete newUsers[0].id;
 
       req.session.userId = newUsers[0].id;
       res.cookie('loggedIn', true);
-      res.sendStatus(200);
+      res.status(200);
+      res.send(newUsers[0]);
     })
     .catch((err) => {
-      next(err);
+      next(boom.wrap(err));
     });
 });
 

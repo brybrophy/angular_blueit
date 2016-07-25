@@ -16,6 +16,8 @@ const morgan = require('morgan');
 const app = express();
 
 const users = require('./routes/users');
+const topics = require('./routes/topics');
+// const posts = require('./routes/posts');
 
 app.disable('x-powered-by');
 
@@ -38,7 +40,9 @@ app.use(cookieSession({
   secret: process.env.SESSION_SECRET
 }));
 
-app.use(users)
+app.use(users);
+app.use(topics);
+// app.use(posts);
 
 app.use((_req, res) => {
   res.sendStatus(404);
@@ -46,9 +50,9 @@ app.use((_req, res) => {
 
 // eslint-disable-next-line max-params
 app.use((err, _req, res, _next) => {
-  if (err.status || err.statusCode) {
+  if (err.status || err.statusCode || err.output.statusCode) {
     return res
-      .status(err.status || err.statusCode)
+      .status(err.status || err.statusCode || err.output.statusCode)
       .send(err);
   }
 
