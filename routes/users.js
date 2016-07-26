@@ -21,7 +21,7 @@ router.post('/users', ev(validations.post), (req, res, next) => {
     .first()
     .then((exists) => {
       if (exists) {
-        throw boom.conflict('Username already exists');
+        throw boom.create(409, 'Username already exists');
       }
 
       return bcrypt.hash(password, 12);
@@ -42,7 +42,7 @@ router.post('/users', ev(validations.post), (req, res, next) => {
       res.send(newUsers[0]);
     })
     .catch((err) => {
-      next(boom.wrap(err));
+      next(err);
     });
 });
 

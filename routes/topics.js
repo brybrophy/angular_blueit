@@ -21,7 +21,7 @@ router.post('/topics', ev(validations.post), (req, res, next) => {
     .first()
     .then((exists) => {
       if (exists) {
-        throw boom.conflict('Topic already exists');
+        throw boom.create(409, 'Topic already exists');
       }
 
       const newTopic = { name };
@@ -34,7 +34,7 @@ router.post('/topics', ev(validations.post), (req, res, next) => {
       res.send(newTopics[0]);
     })
     .catch((err) => {
-      next(boom.wrap(err));
+      next(err);
     });
 });
 
@@ -47,7 +47,7 @@ router.get('/topics', (req, res, next) => {
       res.send(rows)
     })
     .catch((err) => {
-      next(boom.wrap(err));
+      next(err);
     });
 });
 

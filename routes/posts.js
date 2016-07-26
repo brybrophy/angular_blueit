@@ -21,7 +21,7 @@ router.post('/posts', ev(validations.post), (req, res, next) => {
     .first()
     .then((exists) => {
       if (exists) {
-        throw boom.conflict('A post with this title already exists.');
+        throw boom.create(409, 'A post with this title already exists.');
       }
 
       const newPost = { title, imageUrl, description, userId, topicId };
@@ -33,7 +33,7 @@ router.post('/posts', ev(validations.post), (req, res, next) => {
       res.send(newPosts[0]);
     })
     .catch((err) => {
-      next(boom.wrap(err));
+      next(err);
     });
 });
 
@@ -41,10 +41,14 @@ router.get('/posts', (req, res, next) => {
   knex('posts')
     .orderBy('title')
     .then((posts) => {
+      if (posts.length <= 0) {
+        throw boom.create(404, 'There are no posts yet. Be the first one to write a post on Blueit!')
+      }
+
       res.send(posts);
     })
     .catch((err) => {
-      next(boom.wrap(err));
+      next(err);
     });
 });
 
@@ -55,10 +59,14 @@ router.get('/posts/:topicId', (req, res, next) => {
     .where('topic_id', topicId)
     .orderBy('title')
     .then((posts) => {
+      if (posts.length <= 0) {
+        throw boom.create(404, 'This topic does not contain any posts.')
+      }
+
       res.send(posts);
     })
     .catch((err) => {
-      next(boom.wrap(err));
+      next(err);
     });
 });
 
