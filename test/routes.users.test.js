@@ -10,7 +10,7 @@ const knex = require('../knex');
 
 const posts = require('../routes/posts');
 
-suite('Routes Topics', () => {
+suite('Routes Users', () => {
   before((done) => {
     knex.migrate.latest()
       .then(() => {
@@ -31,38 +31,26 @@ suite('Routes Topics', () => {
       });
   });
 
-  test('GET /topics', (done) => {
+  test('POST /users', (done) => {
     request(server)
-      .get('/topics')
-      .expect('Content-Type', /json/)
-      .expect(200, [{
-        id: 2,
-        name: 'Cats',
-        created_at: new Date('2016-07-23 14:26:16 UTC').toISOString(),
-        updated_at: new Date('2016-07-23 14:26:16 UTC').toISOString()
-      },
-      {
-        id: 1,
-        name: 'Dogs',
-        created_at: new Date('2016-07-23 14:26:16 UTC').toISOString(),
-        updated_at: new Date('2016-07-23 14:26:16 UTC').toISOString()
-      }], done);
-  });
-
-  test('POST /topics', (done) => {
-    request(server)
-      .post('/topics')
+      .post('/users')
       .send({
-        name: 'Songs by Gene Belcher',
+        username: 'royalBaby',
+        password: 'burgermusic',
+        firstName: 'Gene',
+        lastName: 'Belcher'
       })
       .expect('Content-Type', /json/)
       .expect((res) => {
         delete res.body.created_at;
         delete res.body.updated_at;
+        delete res.body.hashed_password;
       })
       .expect(200, {
-        id: 3,
-        name: 'Songs by Gene Belcher'
+        id: 2,
+        username: 'royalBaby',
+        first_name: 'Gene',
+        last_name: 'Belcher'
       }, done);
   });
 });

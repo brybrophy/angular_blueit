@@ -34,7 +34,6 @@ router.post('/users', ev(validations.post), (req, res, next) => {
     })
     .then((newUsers) => {
       delete newUsers[0].hashed_password;
-      delete newUsers[0].id;
 
       res.send(newUsers[0]);
     })
