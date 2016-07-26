@@ -17,7 +17,7 @@ const app = express();
 
 const users = require('./routes/users');
 const topics = require('./routes/topics');
-// const posts = require('./routes/posts');
+const posts = require('./routes/posts');
 
 app.disable('x-powered-by');
 
@@ -42,7 +42,7 @@ app.use(cookieSession({
 
 app.use(users);
 app.use(topics);
-// app.use(posts);
+app.use(posts);
 
 app.use((_req, res) => {
   res.sendStatus(404);
