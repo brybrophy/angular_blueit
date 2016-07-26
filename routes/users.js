@@ -36,9 +36,6 @@ router.post('/users', ev(validations.post), (req, res, next) => {
       delete newUsers[0].hashed_password;
       delete newUsers[0].id;
 
-      req.session.userId = newUsers[0].id;
-      res.cookie('loggedIn', true);
-      res.status(200);
       res.send(newUsers[0]);
     })
     .catch((err) => {

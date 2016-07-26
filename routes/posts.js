@@ -53,7 +53,11 @@ router.get('/posts', (req, res, next) => {
 });
 
 router.get('/posts/:topicId', (req, res, next) => {
-  const topicId = req.params.topicId;
+  const topicId = Number.parseInt(req.params.topicId);
+
+  if (Number.isNaN(topicId)) {
+    return boom.create(400, 'Invalid Topic Id');
+  }
 
   knex('posts')
     .where('topic_id', topicId)

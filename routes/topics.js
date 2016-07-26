@@ -29,8 +29,6 @@ router.post('/topics', ev(validations.post), (req, res, next) => {
       return knex('topics').insert(newTopic, '*');
     })
     .then((newTopics) => {
-      delete newTopics[0].id;
-
       res.send(newTopics[0]);
     })
     .catch((err) => {
