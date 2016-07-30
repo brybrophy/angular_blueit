@@ -8,8 +8,7 @@ exports.seed = function(knex) {
         name: 'Dogs',
         created_at: new Date('2016-07-23 14:26:16 UTC'),
         updated_at: new Date('2016-07-23 14:26:16 UTC')
-      },
-      {
+      }, {
         id: 2,
         name: 'Cats',
         created_at: new Date('2016-07-23 14:26:16 UTC'),

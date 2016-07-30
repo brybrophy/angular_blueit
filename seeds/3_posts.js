@@ -13,8 +13,7 @@ exports.seed = function(knex) {
         topic_id: 1,
         created_at: new Date('2016-07-23 14:26:16 UTC'),
         updated_at: new Date('2016-07-23 14:26:16 UTC')
-      },
-      {
+      }, {
         id: 2,
         title: "Wagging That Tail",
         image_url: "https://a.thumbs.redditmedia.com/pl1fM2jukfU2xW6hamMUF5dJ5gC_igj-1Z2oMwQM_90.jpg",

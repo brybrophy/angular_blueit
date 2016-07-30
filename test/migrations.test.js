@@ -146,5 +146,5 @@ suite('Migrations', () => {
     .catch((err) => {
       done(err);
     });
-  });
+  }); 
 });
