@@ -128,7 +128,7 @@
               "{{ post.title }}"
             </h3>
             <section class="col-sm-2 votes">
-                <i class="glyphicon glyphicon-arrow-up"></i>
+                <i ng-click="posts.upVote()" class="glyphicon glyphicon-arrow-up"></i>
                 <p>{{ post.rating }}</p>
                 <i class="glyphicon glyphicon-arrow-down"></i>
             </section>

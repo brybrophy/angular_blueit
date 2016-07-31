@@ -15,6 +15,10 @@ aside {
   height: 95vh;
 }
 
+i:hover {
+  cursor: pointer;
+}
+
 .add-post {
   margin-top: 23px;
 }

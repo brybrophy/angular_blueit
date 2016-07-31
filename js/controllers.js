@@ -140,5 +140,9 @@
       this.postsForm.imgUrl = '';
       this.newPost = {};
     };
+
+    this.upVote = () => {
+      console.log();
+    };
   });
 })();
