@@ -1,0 +1,29 @@
+aside {
+  background-color: #DEE8F3;
+  bottom: 20px;
+  height: 100vh;
+}
+
+.register-link {
+  position: relative;
+  bottom:30px;
+  left: 420px;
+}
+
+.logo.img-responsive{
+  height: inherit;
+  width: auto;
+}
+
+.navbar {
+  height: 70px;
+}
+
+.navbar-form {
+  top: 25px;
+  position: relative;
+}
+
+.push-right {
+  margin-left: 10px;
+}
