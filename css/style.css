@@ -1,7 +1,65 @@
+article {
+  border: 2px solid #9098A1;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+article, .header {
+  background-color: #CED7E1;
+  color: #2D3032;
+}
+
 aside {
   background-color: #DEE8F3;
   bottom: 20px;
-  height: 100vh;
+  height: 95vh;
+}
+
+.add-post {
+  margin-top: 23px;
+}
+
+.add-post-btn {
+  margin: 15px 0 0 10px;
+}
+
+.add-post-form {
+  margin-bottom: 20px;
+}
+
+.input-group-btn:last-child>.btn {
+  background-color: #eeeeee;
+  border: 1px solid lightgrey;
+}
+
+.input-group-btn:last-child>.btn:hover {
+  background-color: transparent;
+}
+
+.logo.img-responsive{
+  bottom: 4px;
+  height: inherit;
+  position: relative;
+  width: auto;
+}
+
+.navbar {
+  height: 65px;
+}
+
+.navbar-form {
+  top: 18px;
+  position: relative;
+}
+
+/*.posts {
+  border-radius: 5px;
+  height: 90vh;
+  overflow: scroll;
+}*/
+
+.push-right {
+  margin-left: 10px;
 }
 
 .register-link {
@@ -10,20 +68,12 @@ aside {
   left: 420px;
 }
 
-.logo.img-responsive{
-  height: inherit;
-  width: auto;
-}
-
-.navbar {
-  height: 70px;
-}
-
-.navbar-form {
-  top: 25px;
-  position: relative;
-}
-
-.push-right {
-  margin-left: 10px;
+.votes {
+  color: #2D3032;
+  background-color: white;
+  border-radius: 5px;
+  font-size: 2.2rem;
+  height: 130px;
+  padding: 2% 0 0 0;
+  text-align: center;
 }
