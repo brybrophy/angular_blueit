@@ -36,7 +36,7 @@ router.post('/topics', ev(validations.post), (req, res, next) => {
     });
 });
 
-router.get('/topics', (req, res, next) => {
+router.get('/api/topics', (req, res, next) => {
   knex('topics')
     .orderBy('name')
     .then((rows) => {

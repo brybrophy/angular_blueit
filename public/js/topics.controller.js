@@ -9,6 +9,7 @@
 
   function TopicsCtrl($http) {
     this.sortBy = ' ';
+    this.topics = [];
 
     this.addTopic = () => {
       this.newTopic = {};
@@ -32,5 +33,17 @@
       this.topicsForm.topicName = '';
       this.newTopic = {};
     };
+
+    const activate = () => {
+      $http.get('/api/topics')
+      .then((res) => {
+        this.topics = res.data;
+      })
+      .catch((err) => {
+        throw err;
+      });
+    };
+
+    activate();
   };
 })();
