@@ -1,6 +1,6 @@
 article {
   border: 2px solid #9098A1;
-  border-radius: 5px;
+  border-radius: 1px;
   padding: 20px;
 }
 
@@ -13,10 +13,12 @@ aside {
   background-color: #D3E0F0;
   bottom: 20px;
   height: 200vh;
+  position: fixed;
 }
 
 main .form-control {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
+  margin-top: 10px;
 }
 
 i:hover {
@@ -35,9 +37,21 @@ i:hover {
   margin: 20px 0 20px 0;
 }
 
+.hamburger {
+  bottom: 34px;
+  position: relative;
+}
+
+.collapse-form {
+  padding: 25px;
+}
+
+
 .input-group-btn:last-child>.btn {
   background-color: #eeeeee;
   border: 1px solid lightgrey;
+  position: relative;
+  top: 5px;
 }
 
 .input-group-btn:last-child>.btn:hover {

@@ -40,6 +40,21 @@
 
     <main ng-controller="PostsCtrl as posts" class="row">
       <aside class="col-sm-4 col-md-2">
+        <form class="collapse-form hidden-md hidden-lg row" role="search">
+          <div class="form-group">
+            <a ng-click="showRegister=true" class="pull-right" href="#">
+              Not a member? Register here.
+            </a>
+
+            <label for="username"></label>
+            <input name="username" type="text" class="form-control" placeholder="username">
+
+            <label for="password"></label>
+            <input name="password" type="password" class="form-control" placeholder="password">
+
+          </div>
+          <button type="text" class="btn btn-default pull-right">Login</button>
+        </form>
         <section class="row">
 
           <div class="panel panel-default push-right">
@@ -82,11 +97,11 @@
               </form>
             </div>
 
-            <div class="list-group">
+            <div class="list-group" ng-model="topics.sortBy">
               <button type="button" class="list-group-item">
                All
              </button>
-              <button ng-repeat="topic in topics.topics | orderBy: 'name' | filter : searchTopics" type="button" class="list-group-item">
+              <button ng-repeat="topic in topics.topics | orderBy: 'name' | filter : searchTopics" value="topic.name" type="button" class="list-group-item">
                 {{ topic.name }}
               </button>
             </div>
@@ -143,15 +158,15 @@
           </span>
         </form>
 
-        <article ng-repeat="post in posts.posts | orderBy : '-created_at'" class="row">
+        <article ng-repeat="post in posts.posts | orderBy : '-created_at' | filter : topics.sortBy" class="row">
             <img class="img-rounded col-sm-3" src="{{ post.image_url }}">
             <h3 class="col-sm-7">
               "{{ post.title }}"
             </h3>
             <section class="col-sm-2 votes">
-                <i ng-click="posts.upVote()" class="glyphicon glyphicon-arrow-up"></i>
+                <i ng-click="posts.upVote(post)" class="glyphicon glyphicon-arrow-up"></i>
                 <p>{{ post.rating }}</p>
-                <i class="glyphicon glyphicon-arrow-down"></i>
+                <i ng-click="posts.downVote(post)" class="glyphicon glyphicon-arrow-down"></i>
             </section>
             <small class="push-right">{{ post.created_at | date : 'medium' }}</small>
         </article>
