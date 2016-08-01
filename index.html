@@ -22,7 +22,9 @@
 
         <form class="navbar-form navbar-right hidden-sm hidden-xs" role="search">
           <div class="form-group">
-            <a class="register-link" href="#">Not a member? Register here.</a>
+            <a ng-click="showRegister=true" class="register-link" href="#">
+              Not a member? Register here.
+            </a>
 
             <label for="username"></label>
             <input name="username" type="text" class="form-control" placeholder="username">
@@ -91,33 +93,52 @@
           </div>
         </section>
       </aside>
-      <section class="col-sm-8 col-md-6 col-md-offset-1">
+      <section class="col-sm-8 col-md-6 col-md-offset-1 main">
+        <form ng-show="showRegister" class="row register-form" name="registerForm">
+          <label for="userRegister">Username</label>
+          <input class="form-control" type="text" name="userRegister" placeholder="">
+
+          <label for="userRegister">Email</label>
+          <input class="form-control" type="email" name="emailRegister" placeholder="example@blueit.com">
+
+          <label for="userRegister">Password</label>
+          <input class="form-control" type="password" name="passwordRegister" placeholder="must be 8 or more characters">
+
+          <button ng-click="showRegister=false" class="pull-right btn btn-default add-post-btn" type="submit" name="action">
+            Register
+          </button>
+
+          <span ng-click="showRegister=false" class="pull-right btn btn-default add-post-btn" type="text">
+            Cancel
+          </span>
+        </form>
         <header class="row">
           <div class="col-lg-10">
             <h1>Posts</h1>
           </div>
-          <button ng-click="showMe=true" type="text" class="btn btn-default col-lg-2 add-post">Add New Post</button>
+          <button ng-click="showAddPost=true" type="text" class="btn btn-default col-lg-2 add-post">Add New Post</button>
         </header>
 
-        <form ng-show="showMe"  ng-submit="posts.addPost()" class="row add-post-form" novalidate name="postsForm" role="search">
-          <select class="form-control">
+        <form ng-show="showAddPost"  ng-submit="posts.addPost()" class="row add-post-form" novalidate name="postsForm" role="search">
+          <label for="postTopic">Topic</label>
+          <select name="postTopic" class="form-control">
             <option selected disabled>Choose Topic</option>
             <option ng-repeat="topic in topics.topics | orderBy : 'name'">
               {{ topic.name }}
             </option>
           </select>
 
-          <label for="postTitle"></label>
+          <label for="postTitle">Title</label>
           <input ng-model="posts.postsForm.postTitle" name="postTitle" type="text" class="form-control" placeholder="Title">
 
-          <label for="postImg"></label>
-          <input ng-model="posts.postsForm.imgUrl" type="text" class="form-control" name="postImg" placeholder="Url to image for post" required>
+          <label for="postImg">Image URL</label>
+          <input ng-model="posts.postsForm.imgUrl" type="text" class="form-control" name="postImg" placeholder="www.example.com/image" required>
 
-          <button ng-click="showMe=false" class="pull-right btn btn-default add-post-btn" type="submit" name="action">
+          <button ng-click="showAddPost=false" class="pull-right btn btn-default add-post-btn" type="submit" name="action">
             Submit Post
           </button>
 
-          <span ng-click="showMe=false" class="pull-right btn btn-default add-post-btn" type="text">
+          <span ng-click="showAddPost=false" class="pull-right btn btn-default add-post-btn" type="text">
             Cancel
           </span>
         </form>
