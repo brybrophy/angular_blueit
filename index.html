@@ -168,7 +168,9 @@
                 <p>{{ post.rating }}</p>
                 <i ng-click="posts.downVote(post)" class="glyphicon glyphicon-arrow-down"></i>
             </section>
-            <small class="push-right">{{ post.created_at | date : 'medium' }}</small>
+            <small>
+              <span class="push-right" am-time-ago="{{ post.created_at }}"></span>
+            </small>
         </article>
       </section>
     </main>
@@ -176,6 +178,9 @@
     <script src="js/jquery-3.1.0.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/filters.js"></script>
     <script src="js/controllers.js"></script>

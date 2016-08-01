@@ -1,6 +1,6 @@
 (function() {
   'use strict';
 
-  angular.module('blueitApp', []);
+  angular.module('blueitApp', ['angularMoment', 'ngRoute']);
 
 })();
