@@ -31,9 +31,9 @@ suite('Routes Posts', () => {
       });
   });
 
-  test('GET /posts', (done) => {
+  test('GET /api/posts', (done) => {
     request(server)
-      .get('/posts')
+      .get('/api/posts')
       .expect('Content-Type', /json/)
       .expect(200, [{
         id: 1,
@@ -59,9 +59,9 @@ suite('Routes Posts', () => {
       }], done);
   });
 
-  test('GET /posts/:topicId', (done) => {
+  test('GET /api/posts/:topicId', (done) => {
     request(server)
-      .get('/posts/1')
+      .get('/api/posts/1')
       .expect('Content-Type', /json/)
       .expect(200, [{
         id: 1,
@@ -87,9 +87,9 @@ suite('Routes Posts', () => {
       }], done);
   });
 
-  test('POST /posts', (done) => {
+  test('POST /api/posts', (done) => {
     request(server)
-      .post('/posts')
+      .post('/api/posts')
       .send({
         title: "If You Give A Cat A Cupcake",
         imageUrl: "https://images-na.ssl-images-amazon.com/images/I/610KhnVUlUL._SX258_BO1,204,203,200_.jpg,",

@@ -12,7 +12,7 @@ const validations = require('../validations/users');
 const boom = require('boom');
 const { camelizeKeys, decamelizeKeys } = require('humps');
 
-router.post('/users', ev(validations.post), (req, res, next) => {
+router.post('/api/users', ev(validations.post), (req, res, next) => {
   const { username, password, firstName, lastName} = req.body;
 
   knex('users')

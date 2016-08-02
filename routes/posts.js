@@ -12,7 +12,7 @@ const validations = require('../validations/posts');
 const boom = require('boom');
 const { camelizeKeys, decamelizeKeys } = require('humps');
 
-router.post('/posts', ev(validations.post), (req, res, next) => {
+router.post('/api/posts', ev(validations.post), (req, res, next) => {
   const { title, imageUrl, description, userId, topicId } = req.body;
 
   knex('posts')
@@ -37,7 +37,7 @@ router.post('/posts', ev(validations.post), (req, res, next) => {
     });
 });
 
-router.get('/posts', (req, res, next) => {
+router.get('/api/posts', (req, res, next) => {
   knex('posts')
     .orderBy('title')
     .then((posts) => {
@@ -52,7 +52,7 @@ router.get('/posts', (req, res, next) => {
     });
 });
 
-router.get('/posts/:topicId', (req, res, next) => {
+router.get('/api/posts/:topicId', (req, res, next) => {
   const topicId = Number.parseInt(req.params.topicId);
 
   if (Number.isNaN(topicId)) {

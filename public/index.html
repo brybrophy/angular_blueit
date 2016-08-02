@@ -101,7 +101,7 @@
               <button type="button" class="list-group-item">
                All
              </button>
-              <button ng-repeat="topic in topics.topics | orderBy: 'name' | filter : searchTopics" value="topic.name" type="button" class="list-group-item">
+              <button ng-repeat="topic in topics.topics | orderBy: 'name' | filter : searchTopics" value="topic.name" type="button" class="list-group-item ng-cloak">
                 {{ topic.name }}
               </button>
             </div>
@@ -134,7 +134,7 @@
           <button ng-click="showAddPost=true" type="text" class="btn btn-default col-lg-2 add-post">Add New Post</button>
         </header>
 
-        <form ng-show="showAddPost"  ng-submit="posts.addPost()" class="row add-post-form" novalidate name="postsForm" role="search">
+        <form ng-repeat="topic in topics.topics" ng-show="showAddPost"  ng-submit="posts.addPost(topic)" class="row add-post-form" novalidate name="postsForm" role="search">
           <label for="postTopic">Topic</label>
           <select name="postTopic" class="form-control">
             <option selected disabled>Choose Topic</option>
@@ -145,6 +145,9 @@
 
           <label for="postTitle">Title</label>
           <input ng-model="posts.postsForm.postTitle" name="postTitle" type="text" class="form-control" placeholder="Title">
+
+          <label for="postTitle">Description</label>
+          <input ng-model="posts.postsForm.postDescription" name="postDescription" type="text" class="form-control" placeholder="Description">
 
           <label for="postImg">Image URL</label>
           <input ng-model="posts.postsForm.imgUrl" type="text" class="form-control" name="postImg" placeholder="www.example.com/image" required>
@@ -163,14 +166,18 @@
             <h3 class="col-sm-7">
               "{{ post.title }}"
             </h3>
+            <p class="push-right hidden-sm hidden-md hidden-lg">{{ post.description }}</p>
             <section class="col-sm-2 votes">
                 <i ng-click="posts.upVote(post)" class="glyphicon glyphicon-arrow-up"></i>
                 <p>{{ post.rating }}</p>
                 <i ng-click="posts.downVote(post)" class="glyphicon glyphicon-arrow-down"></i>
             </section>
-            <small>
-              <span class="push-right" am-time-ago="{{ post.created_at }}"></span>
-            </small>
+            <section class="col-sm-7 col-sm-offset-3">
+              <p class="push-right hidden-xs">{{ post.description }}</p>
+              <small>
+                <span class="push-right" am-time-ago="{{ post.created_at }}"></span>
+              </small>
+            </section>
         </article>
       </section>
     </main>

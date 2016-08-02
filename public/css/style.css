@@ -9,6 +9,10 @@ article, .header {
   color: #2D3032;
 }
 
+article, p {
+  font-size: 1.8rem;
+}
+
 aside {
   background-color: #D3E0F0;
   bottom: 20px;

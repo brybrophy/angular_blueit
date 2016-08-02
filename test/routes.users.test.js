@@ -31,9 +31,9 @@ suite('Routes Users', () => {
       });
   });
 
-  test('POST /users', (done) => {
+  test('POST /api/users', (done) => {
     request(server)
-      .post('/users')
+      .post('/api/users')
       .send({
         username: 'royalBaby',
         password: 'burgermusic',

@@ -30,6 +30,18 @@
 
       this.topics.push(this.newTopic);
 
+      const activate = () => {
+        return $http.post('/api/topics', this.newTopic)
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            throw err;
+          });
+      };
+
+      activate();
+
       this.topicsForm.topicName = '';
       this.newTopic = {};
     };

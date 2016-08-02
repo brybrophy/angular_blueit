@@ -31,9 +31,9 @@ suite('Routes Topics', () => {
       });
   });
 
-  test('GET /topics', (done) => {
+  test('GET /api/topics', (done) => {
     request(server)
-      .get('/topics')
+      .get('/api/topics')
       .expect('Content-Type', /json/)
       .expect(200, [{
         id: 2,
@@ -49,9 +49,9 @@ suite('Routes Topics', () => {
       }], done);
   });
 
-  test('POST /topics', (done) => {
+  test('POST /api/topics', (done) => {
     request(server)
-      .post('/topics')
+      .post('/api/topics')
       .send({
         name: 'Songs by Gene Belcher',
       })

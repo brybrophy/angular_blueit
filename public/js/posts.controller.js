@@ -2,13 +2,15 @@
   'use strict';
 
   const app = angular.module('blueitApp');
-  
+
   app.controller('PostsCtrl', PostsCtrl);
 
   PostsCtrl.$inject = ['$http'];
 
   function PostsCtrl($http) {
-    this.addPost = () => {
+    this.posts = [];
+
+    this.addPost = (topic) => {
       this.newPost = {};
 
       const postTitle = this.postsForm.postTitle.replace(/\w\S*/g,(txt) => {
@@ -24,15 +26,30 @@
 
       const imgUrl = 'http://' + this.postsForm.imgUrl;
 
-      this.newPost.id = this.posts[this.posts.length - 1].id + 1
       this.newPost.title = postTitle;
-      this.newPost.image_url = imgUrl;
+      this.newPost.description = this.postsForm.postDescription
+      this.newPost.imageUrl = imgUrl;
       this.newPost.rating = 0;
-      this.newPost.created_at = new Date().getTime();
+      this.newPost.userId = 1;
+      this.newPost.topicId = topic.id;
+      this.newPost.created_at = new Date();
+
+      console.log(this.newPost);
 
       this.posts.push(this.newPost);
 
-      console.log(this.posts);
+      const activate = () => {
+        return $http.post('/api/posts', this.newPost)
+        .then((res) => {
+          this.posts.push(res.data[0]);
+        })
+        .catch((err) => {
+          throw err;
+        });
+      };
+
+      activate();
+
       this.postsForm.postTitle = '';
       this.postsForm.imgUrl = '';
       this.newPost = {};
@@ -45,5 +62,22 @@
     this.downVote = (post) => {
       post.rating -= 1;
     };
+
+    const activate = () => {
+      $http.get('/api/posts')
+      .then((res) => {
+        this.posts = res.data.map((post) => {
+          return Object.assign(post, {
+            created_at: new Date(post.created_at).getTime(),
+            updated_at: new Date(post.updated_at).getTime()
+          });
+        })
+      })
+      .catch((err) => {
+        throw err;
+      });
+    };
+
+    activate();
   };
 })();
