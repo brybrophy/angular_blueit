@@ -8,7 +8,6 @@
   TopicsCtrl.$inject = ['$http'];
 
   function TopicsCtrl($http) {
-    this.sortBy = ' ';
     this.topics = [];
 
     this.addTopic = () => {
@@ -25,22 +24,15 @@
         }
       };
 
-      this.newTopic.id = this.topics[this.topics.length - 1].id + 1
       this.newTopic.name = topicName;
 
-      this.topics.push(this.newTopic);
-
-      const activate = () => {
-        return $http.post('/api/topics', this.newTopic)
-          .then((res) => {
-            console.log(res.data);
-          })
-          .catch((err) => {
-            throw err;
-          });
-      };
-
-      activate();
+      $http.post('/api/topics', this.newTopic)
+        .then((res) => {
+          this.topics.push(res.data);
+        })
+        .catch((err) => {
+          throw err;
+        });
 
       this.topicsForm.topicName = '';
       this.newTopic = {};
@@ -48,12 +40,12 @@
 
     const activate = () => {
       $http.get('/api/topics')
-      .then((res) => {
-        this.topics = res.data;
-      })
-      .catch((err) => {
-        throw err;
-      });
+        .then((res) => {
+          this.topics = res.data;
+        })
+        .catch((err) => {
+          throw err;
+        });
     };
 
     activate();

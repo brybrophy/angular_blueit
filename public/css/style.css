@@ -16,7 +16,8 @@ article, p {
 aside {
   background-color: #D3E0F0;
   bottom: 20px;
-  height: 200vh;
+  height: 400vh;
+  overflow: auto;
   position: fixed;
 }
 
@@ -40,16 +41,6 @@ i:hover {
 .add-post-form {
   margin: 20px 0 20px 0;
 }
-
-.hamburger {
-  bottom: 34px;
-  position: relative;
-}
-
-.collapse-form {
-  padding: 25px;
-}
-
 
 .input-group-btn:last-child>.btn {
   background-color: #eeeeee;

@@ -5,13 +5,15 @@
 
   app.controller('PostsCtrl', PostsCtrl);
 
-  PostsCtrl.$inject = ['$http'];
+  PostsCtrl.$inject = ['$http', '$scope'];
 
   function PostsCtrl($http) {
     this.posts = [];
+    this.sortBy = '';
 
-    this.addPost = (topic) => {
+    this.addPost = () => {
       this.newPost = {};
+      console.log(this.topic);
 
       const postTitle = this.postsForm.postTitle.replace(/\w\S*/g,(txt) => {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -24,24 +26,23 @@
         }
       };
 
-      const imgUrl = 'http://' + this.postsForm.imgUrl;
+      const imgUrl = this.postsForm.imgUrl;
 
       this.newPost.title = postTitle;
       this.newPost.description = this.postsForm.postDescription
       this.newPost.imageUrl = imgUrl;
       this.newPost.rating = 0;
       this.newPost.userId = 1;
-      this.newPost.topicId = topic.id;
+      this.newPost.topicId = this.topic;
       this.newPost.created_at = new Date();
 
       console.log(this.newPost);
-
-      this.posts.push(this.newPost);
 
       const activate = () => {
         return $http.post('/api/posts', this.newPost)
         .then((res) => {
           this.posts.push(res.data[0]);
+          $scope.apply();
         })
         .catch((err) => {
           throw err;

@@ -38,7 +38,7 @@
       </div>
     </nav>
 
-    <main ng-controller="PostsCtrl as posts" class="row">
+    <main ng-controller="PostsCtrl as posts">
       <aside class="col-sm-4 col-md-2">
         <form class="collapse-form hidden-md hidden-lg row" role="search">
           <div class="form-group">
@@ -57,7 +57,7 @@
         </form>
         <section class="row">
 
-          <div class="panel panel-default push-right">
+          <div class="panel panel-default">
             <div class="panel-heading">Topics</div>
             <div class="panel-body">
 
@@ -97,11 +97,11 @@
               </form>
             </div>
 
-            <div class="list-group" ng-model="topics.sortBy">
-              <button type="button" class="list-group-item">
+            <div class="list-group">
+              <button ng-click="topics.sortBy = ''" type="button" class="list-group-item">
                All
              </button>
-              <button ng-repeat="topic in topics.topics | orderBy: 'name' | filter : searchTopics" value="topic.name" type="button" class="list-group-item ng-cloak">
+              <button ng-click="topics.sortBy = topic.id" ng-repeat="topic in topics.topics | orderBy: 'name' | filter : searchTopics" type="button" class="list-group-item" ng-cloak>
                 {{ topic.name }}
               </button>
             </div>
@@ -134,11 +134,11 @@
           <button ng-click="showAddPost=true" type="text" class="btn btn-default col-lg-2 add-post">Add New Post</button>
         </header>
 
-        <form ng-repeat="topic in topics.topics" ng-show="showAddPost"  ng-submit="posts.addPost(topic)" class="row add-post-form" novalidate name="postsForm" role="search">
+        <form ng-show="showAddPost"  ng-submit="posts.addPost()" class="row add-post-form" novalidate name="postsForm" role="search">
           <label for="postTopic">Topic</label>
-          <select name="postTopic" class="form-control">
+          <select name="postTopic" class="form-control" ng-model="posts.topic">
             <option selected disabled>Choose Topic</option>
-            <option ng-repeat="topic in topics.topics | orderBy : 'name'">
+            <option value="{{ topic.id }}" ng-repeat="topic in topics.topics | orderBy : 'name'">
               {{ topic.name }}
             </option>
           </select>
@@ -161,7 +161,7 @@
           </span>
         </form>
 
-        <article ng-repeat="post in posts.posts | orderBy : '-created_at' | filter : topics.sortBy" class="row">
+        <article ng-repeat="post in posts.posts | orderBy : '-created_at' | filter : { topic_id: topics.sortBy } " class="row">
             <img class="img-rounded col-sm-3" src="{{ post.image_url }}">
             <h3 class="col-sm-7">
               "{{ post.title }}"
@@ -180,6 +180,7 @@
             </section>
         </article>
       </section>
+
     </main>
 
     <script src="js/jquery-3.1.0.min.js"></script>
@@ -189,6 +190,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/app.config.js"></script>
     <script src="js/filters.js"></script>
     <script src="js/topics.controller.js"></script>
     <script src="js/posts.controller.js"></script>
