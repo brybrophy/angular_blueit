@@ -9,7 +9,8 @@
 
   function PostsCtrl($http, postsFac) {
     this.posts = [];
-    this.sortBy = '';
+    this.filterBy = '';
+    this.sortBy = '-created_at';
 
     this.addPost = () => {
       const newPost = {};
