@@ -5,9 +5,9 @@
 
   app.controller('TopicsCtrl', TopicsCtrl);
 
-  TopicsCtrl.$inject = ['$http'];
+  TopicsCtrl.$inject = ['topicsFac'];
 
-  function TopicsCtrl($http) {
+  function TopicsCtrl(topicsFac) {
     this.topics = [];
 
     this.addTopic = () => {
@@ -26,9 +26,9 @@
 
       this.newTopic.name = topicName;
 
-      $http.post('/api/topics', this.newTopic)
-        .then((res) => {
-          this.topics.push(res.data);
+      topicsFac.addTopic(this.newTopic)
+        .then((topic) => {
+          this.topics.push(topic)
         })
         .catch((err) => {
           throw err;
@@ -39,9 +39,9 @@
     };
 
     const activate = () => {
-      $http.get('/api/topics')
-        .then((res) => {
-          this.topics = res.data;
+      topicsFac.getTopics()
+        .then((topics) => {
+          this.topics = topics;
         })
         .catch((err) => {
           throw err;

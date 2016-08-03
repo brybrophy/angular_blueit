@@ -1,141 +1,141 @@
-<aside class="col-sm-4 col-md-2">
-  <form class="collapse-form hidden-md hidden-lg row" role="search">
-    <div class="form-group">
-      <a ng-click="showRegister=true" class="pull-right" href="#">
-        Not a member? Register here.
-      </a>
+  <aside class="col-sm-4 col-md-2">
+    <form class="collapse-form hidden-md hidden-lg row" role="search">
+      <div class="form-group">
+        <a ng-click="view.showRegister=true" class="pull-right" href="#/">
+          Not a member? Register here.
+        </a>
 
-      <label for="username"></label>
-      <input name="username" type="text" class="form-control" placeholder="username">
+        <label for="username"></label>
+        <input name="username" type="text" class="form-control" placeholder="username">
 
-      <label for="password"></label>
-      <input name="password" type="password" class="form-control" placeholder="password">
+        <label for="password"></label>
+        <input name="password" type="password" class="form-control" placeholder="password">
 
-    </div>
-    <button type="text" class="btn btn-default pull-right">Login</button>
-  </form>
-  <section class="row">
-
-    <div class="panel panel-default">
-      <div class="panel-heading">Topics</div>
-      <div class="panel-body">
-
-        <form novalidate ng-submit="topics.addTopic()" name="topicsForm">
-          <div class="form-group">
-            <label for="search-topics"></label>
-            <div class="input-group">
-              <input ng-model="searchTopics" type="text" class="form-control" name="search-topics" placeholder="Search Topics">
-              <span class="input-group-btn">
-                <button class="btn btn-secondary glyphicon glyphicon-search" type="submit" name="action"></button>
-              </span>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="topicName"></label>
-            <div class="input-group">
-              <input ng-model="topics.topicsForm.topicName" ng-minlength="3" ng-maxlength="20" type="text" class="form-control" name="topicName" placeholder="Add Topic" required>
-              <span class="input-group-btn">
-                <button class="btn btn-secondary glyphicon glyphicon-plus" type="submit" name="action"></button>
-              </span>
-            </div>
-            <div class="has-error" ng-show="topicsForm.topicName.$dirty && topicsForm.topicName.$invalid">
-              <small class="has-error"  ng-show="topicsForm.topicName.$error.required && !topicsForm.topicName.$pristine">
-                Topic Name is required.
-              </small>
-              <small class="error"
-              ng-show="topicsForm.topicName.$error.minlength">
-                Topic names cannot be fewer than 3 characters.
-              </small>
-              <small class="error"
-              ng-show="topicsForm.topicName.$error.maxlength">
-                Topic names cannot be longer than 20 characters.
-              </small>
-            </div>
-          </div>
-        </form>
       </div>
+      <button type="text" class="btn btn-default pull-right">Login</button>
+    </form>
+    <section class="row">
 
-      <div class="list-group" ng-model="topics.sortBy">
-        <button type="button" class="list-group-item">
-         All
-       </button>
-        <button ng-repeat="topic in topics.topics | orderBy: 'name' | filter : searchTopics" value="topic.name" type="button" class="list-group-item ng-cloak">
+      <div class="panel panel-default">
+        <div class="panel-heading">Topics</div>
+        <div class="panel-body">
+
+          <form novalidate ng-submit="topics.addTopic()" name="topicsForm">
+            <div class="form-group">
+              <label for="search-topics"></label>
+              <div class="input-group">
+                <input ng-model="searchTopics" type="text" class="form-control" name="search-topics" placeholder="Search Topics">
+                <span class="input-group-btn">
+                  <button class="btn btn-secondary glyphicon glyphicon-search" type="submit" name="action"></button>
+                </span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="topicName"></label>
+              <div class="input-group">
+                <input ng-model="topics.topicsForm.topicName" ng-minlength="3" ng-maxlength="20" type="text" class="form-control" name="topicName" placeholder="Add Topic" required>
+                <span class="input-group-btn">
+                  <button class="btn btn-secondary glyphicon glyphicon-plus" type="submit" name="action"></button>
+                </span>
+              </div>
+              <div class="has-error" ng-show="topicsForm.topicName.$dirty && topicsForm.topicName.$invalid">
+                <small class="has-error"  ng-show="topicsForm.topicName.$error.required && !topicsForm.topicName.$pristine">
+                  Topic Name is required.
+                </small>
+                <small class="error"
+                ng-show="topicsForm.topicName.$error.minlength">
+                  Topic names cannot be fewer than 3 characters.
+                </small>
+                <small class="error"
+                ng-show="topicsForm.topicName.$error.maxlength">
+                  Topic names cannot be longer than 20 characters.
+                </small>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="list-group">
+          <button ng-click="topics.sortBy = ''" type="button" class="list-group-item">
+           All
+         </button>
+          <button ng-click="topics.sortBy = topic.id" ng-repeat="topic in topics.topics | orderBy: 'name' | filter : searchTopics" type="button" class="list-group-item" ng-cloak>
+            {{ topic.name }}
+          </button>
+        </div>
+      </div>
+    </section>
+  </aside>
+  <section class="col-sm-8 col-md-6 col-md-offset-1 main">
+    <form ng-show="view.showRegister" class="row register-form" name="registerForm">
+      <label for="userRegister">Username</label>
+      <input class="form-control" type="text" name="userRegister" placeholder="">
+
+      <label for="userRegister">Email</label>
+      <input class="form-control" type="email" name="emailRegister" placeholder="example@blueit.com">
+
+      <label for="userRegister">Password</label>
+      <input class="form-control" type="password" name="passwordRegister" placeholder="must be 8 or more characters">
+
+      <button ng-click="view.showRegister=false" class="pull-right btn btn-default add-post-btn" type="submit" name="action">
+        Register
+      </button>
+
+      <span ng-click="view.showRegister=false" class="pull-right btn btn-default add-post-btn" type="text">
+        Cancel
+      </span>
+    </form>
+    <header class="row">
+      <div class="col-lg-10">
+        <h1>Posts</h1>
+      </div>
+      <button ng-click="showAddPost=true" type="text" class="btn btn-default col-lg-2 add-post">Add New Post</button>
+    </header>
+
+    <form ng-show="showAddPost"  ng-submit="posts.addPost()" class="row add-post-form" novalidate name="postsForm" role="search">
+      <label for="postTopic">Topic</label>
+      <select name="postTopic" class="form-control" ng-model="posts.topic">
+        <option selected disabled>Choose Topic</option>
+        <option value="{{ topic.id }}" ng-repeat="topic in topics.topics | orderBy : 'name'">
           {{ topic.name }}
-        </button>
-      </div>
-    </div>
+        </option>
+      </select>
+
+      <label for="postTitle">Title</label>
+      <input ng-model="posts.postsForm.postTitle" name="postTitle" type="text" class="form-control" placeholder="Title">
+
+      <label for="postTitle">Description</label>
+      <input ng-model="posts.postsForm.postDescription" name="postDescription" type="text" class="form-control" placeholder="Description">
+
+      <label for="postImg">Image URL</label>
+      <input ng-model="posts.postsForm.imgUrl" type="text" class="form-control" name="postImg" placeholder="http://www.example.com/image" required>
+
+      <button ng-click="showAddPost=false" class="pull-right btn btn-default add-post-btn" type="submit" name="action">
+        Submit Post
+      </button>
+
+      <span ng-click="showAddPost=false" class="pull-right btn btn-default add-post-btn" type="text">
+        Cancel
+      </span>
+    </form>
+
+    <article ng-repeat="post in posts.posts | orderBy : '-created_at' | filter : { topic_id: topics.sortBy } " class="row">
+        <img class="img-responsive col-sm-3" src="{{ post.image_url }}">
+        <h3 class="col-sm-7">
+          "{{ post.title }}"
+        </h3>
+        <p class="push-right hidden-sm hidden-md hidden-lg">{{ post.description }}</p>
+        <section class="col-sm-2 votes">
+            <i ng-click="posts.upVote(post)" class="glyphicon glyphicon-arrow-up"></i>
+            <p>{{ post.rating }}</p>
+            <i ng-click="posts.downVote(post)" class="glyphicon glyphicon-arrow-down"></i>
+        </section>
+        <section class="col-sm-7 col-sm-offset-3">
+          <p class="push-right hidden-xs">{{ post.description }}</p>
+          <small>
+            <span class="push-right" am-time-ago="{{ post.created_at }}"></span>
+          </small>
+        </section>
+    </article>
   </section>
-</aside>
-<section class="col-sm-8 col-md-6 col-md-offset-1 main">
-  <form ng-show="showRegister" class="row register-form" name="registerForm">
-    <label for="userRegister">Username</label>
-    <input class="form-control" type="text" name="userRegister" placeholder="">
-
-    <label for="userRegister">Email</label>
-    <input class="form-control" type="email" name="emailRegister" placeholder="example@blueit.com">
-
-    <label for="userRegister">Password</label>
-    <input class="form-control" type="password" name="passwordRegister" placeholder="must be 8 or more characters">
-
-    <button ng-click="showRegister=false" class="pull-right btn btn-default add-post-btn" type="submit" name="action">
-      Register
-    </button>
-
-    <span ng-click="showRegister=false" class="pull-right btn btn-default add-post-btn" type="text">
-      Cancel
-    </span>
-  </form>
-  <header class="row">
-    <div class="col-lg-10">
-      <h1>Posts</h1>
-    </div>
-    <button ng-click="showAddPost=true" type="text" class="btn btn-default col-lg-2 add-post">Add New Post</button>
-  </header>
-
-  <form ng-repeat="topic in topics.topics" ng-show="showAddPost"  ng-submit="posts.addPost(topic)" class="row add-post-form" novalidate name="postsForm" role="search">
-    <label for="postTopic">Topic</label>
-    <select name="postTopic" class="form-control">
-      <option selected disabled>Choose Topic</option>
-      <option ng-repeat="topic in topics.topics | orderBy : 'name'">
-        {{ topic.name }}
-      </option>
-    </select>
-
-    <label for="postTitle">Title</label>
-    <input ng-model="posts.postsForm.postTitle" name="postTitle" type="text" class="form-control" placeholder="Title">
-
-    <label for="postTitle">Description</label>
-    <input ng-model="posts.postsForm.postDescription" name="postDescription" type="text" class="form-control" placeholder="Description">
-
-    <label for="postImg">Image URL</label>
-    <input ng-model="posts.postsForm.imgUrl" type="text" class="form-control" name="postImg" placeholder="www.example.com/image" required>
-
-    <button ng-click="showAddPost=false" class="pull-right btn btn-default add-post-btn" type="submit" name="action">
-      Submit Post
-    </button>
-
-    <span ng-click="showAddPost=false" class="pull-right btn btn-default add-post-btn" type="text">
-      Cancel
-    </span>
-  </form>
-
-  <article ng-repeat="post in posts.posts | orderBy : '-created_at' | filter : topics.sortBy" class="row">
-      <img class="img-rounded col-sm-3" src="{{ post.image_url }}">
-      <h3 class="col-sm-7">
-        "{{ post.title }}"
-      </h3>
-      <p class="push-right hidden-sm hidden-md hidden-lg">{{ post.description }}</p>
-      <section class="col-sm-2 votes">
-          <i ng-click="posts.upVote(post)" class="glyphicon glyphicon-arrow-up"></i>
-          <p>{{ post.rating }}</p>
-          <i ng-click="posts.downVote(post)" class="glyphicon glyphicon-arrow-down"></i>
-      </section>
-      <section class="col-sm-7 col-sm-offset-3">
-        <p class="push-right hidden-xs">{{ post.description }}</p>
-        <small>
-          <span class="push-right" am-time-ago="{{ post.created_at }}"></span>
-        </small>
-      </section>
-  </article>
-</section>

@@ -5,15 +5,17 @@
 
   app.controller('PostsCtrl', PostsCtrl);
 
-  PostsCtrl.$inject = ['$http', '$scope'];
+  PostsCtrl.$inject = ['$http', 'postsFac'];
 
-  function PostsCtrl($http) {
+  function PostsCtrl($http, postsFac) {
     this.posts = [];
     this.sortBy = '';
 
     this.addPost = () => {
-      this.newPost = {};
-      console.log(this.topic);
+      const newPost = {};
+
+      const regEx = /^http/g;
+      let imgUrl;
 
       const postTitle = this.postsForm.postTitle.replace(/\w\S*/g,(txt) => {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -26,34 +28,32 @@
         }
       };
 
-      const imgUrl = this.postsForm.imgUrl;
+      if (!regEx.test(this.postsForm.imgUrl)) {
+        imgUrl = 'http://' + this.postsForm.imgUrl;
+      }
 
-      this.newPost.title = postTitle;
-      this.newPost.description = this.postsForm.postDescription
-      this.newPost.imageUrl = imgUrl;
-      this.newPost.rating = 0;
-      this.newPost.userId = 1;
-      this.newPost.topicId = this.topic;
-      this.newPost.created_at = new Date();
+      else {
+        imgUrl = this.postsForm.imgUrl;
+      }
 
-      console.log(this.newPost);
+      newPost.title = postTitle;
+      newPost.description = this.postsForm.postDescription
+      newPost.imageUrl = imgUrl;
+      newPost.rating = 0;
+      newPost.userId = 1;
+      newPost.topicId = this.topic;
+      newPost.created_at = new Date();
 
-      const activate = () => {
-        return $http.post('/api/posts', this.newPost)
-        .then((res) => {
-          this.posts.push(res.data[0]);
-          $scope.apply();
+
+      postsFac.addPost(newPost)
+        .then((post) => {
+          this.posts.push(post);
+          this.postsForm.postTitle = '';
+          this.postsForm.imgUrl = '';
         })
         .catch((err) => {
           throw err;
         });
-      };
-
-      activate();
-
-      this.postsForm.postTitle = '';
-      this.postsForm.imgUrl = '';
-      this.newPost = {};
     };
 
     this.upVote = (post) => {
@@ -65,18 +65,18 @@
     };
 
     const activate = () => {
-      $http.get('/api/posts')
-      .then((res) => {
-        this.posts = res.data.map((post) => {
-          return Object.assign(post, {
-            created_at: new Date(post.created_at).getTime(),
-            updated_at: new Date(post.updated_at).getTime()
-          });
+      postsFac.getAllPosts()
+        .then((posts) => {
+          this.posts = posts.map((post) => {
+            return Object.assign(post, {
+              created_at: new Date(post.created_at).getTime(),
+              updated_at: new Date(post.updated_at).getTime()
+            });
+          })
         })
-      })
-      .catch((err) => {
-        throw err;
-      });
+        .catch((err) => {
+          throw err;
+        });
     };
 
     activate();
