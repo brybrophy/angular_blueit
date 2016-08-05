@@ -37,7 +37,7 @@ suite('Routes Posts', () => {
       .expect('Content-Type', /json/)
       .expect(200, [{
         id: 1,
-        title: "Dogs Are Not Allowed On NYC Subway Unless They're In A Carrier… So This Happened",
+        title: "Dogs Not Allowed On Subway",
         image_url: "https://b.thumbs.redditmedia.com/WTeAOJlQ98AfIVn7BjV_cDrDLXMuowwmJVo1p1xX5yg.jpg",
         description: "What an awesome story.",
         rating: 0,
@@ -65,7 +65,7 @@ suite('Routes Posts', () => {
       .expect('Content-Type', /json/)
       .expect(200, [{
         id: 1,
-        title: "Dogs Are Not Allowed On NYC Subway Unless They're In A Carrier… So This Happened",
+        title: "Dogs Not Allowed On Subway",
         image_url: "https://b.thumbs.redditmedia.com/WTeAOJlQ98AfIVn7BjV_cDrDLXMuowwmJVo1p1xX5yg.jpg",
         description: "What an awesome story.",
         rating: 0,

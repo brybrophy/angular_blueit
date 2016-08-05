@@ -10,7 +10,6 @@ const port = process.env.PORT || 8000;
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const cookieSession = require('cookie-session');
 const morgan = require('morgan');
 
 const app = express();
@@ -18,6 +17,7 @@ const app = express();
 const users = require('./routes/users');
 const topics = require('./routes/topics');
 const posts = require('./routes/posts');
+const token = require('./routes/token');
 
 app.disable('x-powered-by');
 
@@ -35,16 +35,13 @@ switch (app.get('env')) {
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cookieSession({
-  name: 'blueit',
-  secret: process.env.SESSION_SECRET
-}));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(users);
 app.use(topics);
 app.use(posts);
+app.use(token);
 
 app.use((_req, res) => {
   res.sendStatus(404);

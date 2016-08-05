@@ -3,20 +3,21 @@
 
   const app = angular.module('blueitApp');
 
-  app.controller('AuthCtrl', AuthCtrl);
+  app.controller('AuthorizeCtrl', AuthorizeCtrl);
 
-  AuthCtrl.$inject = ['auth', '$location', '$cookies'];
+  AuthorizeCtrl.$inject = ['auth', '$location', '$cookies'];
 
-  function AuthCtrl(auth, $location, $cookies) {
-    this.email = '';
+  function AuthorizeCtrl(auth, $location, $cookies) {
+    this.username = '';
     this.password = '';
+    this.show = false;
 
     this.isLoggedIn = () => {
       return $cookies.get('loggedIn');
     };
 
     this.login = () => {
-      auth.login(this.email, this.password)
+      auth.login(this.username, this.password)
         .then((user) => {
           $location.path('/');
         })

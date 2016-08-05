@@ -1,18 +1,21 @@
+<div ng-controller="TopicsCtrl as topics">
   <aside class="col-sm-4 col-md-2">
-    <form class="collapse-form hidden-md hidden-lg row" role="search">
+    <form ng-if="!authorize.isLoggedIn()" ng-submit="authorize.login()" class="collapse-form hidden-md hidden-lg row" role="search">
       <div class="form-group">
-        <a ng-click="view.showRegister=true" class="pull-right" href="#/">
+        <a ng-click="authorize.show = true" class="pull-right" href="#/">
           Not a member? Register here.
         </a>
 
         <label for="username"></label>
-        <input name="username" type="text" class="form-control" placeholder="username">
+        <input ng-model="authorize.username" name="username" type="text" class="form-control" placeholder="username">
 
         <label for="password"></label>
-        <input name="password" type="password" class="form-control" placeholder="password">
+        <input ng-model="authorize.password" name="password" type="password" class="form-control" placeholder="password">
 
       </div>
-      <button type="text" class="btn btn-default pull-right">Login</button>
+      <button type="text" class="btn btn-default pull-right">
+        Login
+      </button>
     </form>
     <section class="row">
 
@@ -67,22 +70,22 @@
       </div>
     </section>
   </aside>
-  <section class="col-sm-8 col-md-6 col-md-offset-1 main">
-    <form ng-show="view.showRegister" class="row register-form" name="registerForm">
+  <section ng-controller="RegisterCtrl as register" class="col-sm-8 col-md-6 col-md-offset-1 main">
+    <form ng-show="authorize.show" ng-submit="register.newUser()" class="row register-form" name="registerForm">
       <label for="userRegister">Username</label>
-      <input class="form-control" type="text" name="userRegister" placeholder="">
+      <input ng-model="register.username" class="form-control" type="text" name="userRegister" placeholder="">
 
       <label for="userRegister">Email</label>
-      <input class="form-control" type="email" name="emailRegister" placeholder="example@blueit.com">
+      <input ng-model="register.email" class="form-control" type="email" name="emailRegister" placeholder="example@blueit.com">
 
       <label for="userRegister">Password</label>
-      <input class="form-control" type="password" name="passwordRegister" placeholder="must be 8 or more characters">
+      <input ng-model="register.password" class="form-control" type="password" name="passwordRegister" placeholder="must be 8 or more characters">
 
       <button ng-click="view.showRegister=false" class="pull-right btn btn-default add-post-btn" type="submit" name="action">
         Register
       </button>
 
-      <span ng-click="view.showRegister=false" class="pull-right btn btn-default add-post-btn" type="text">
+      <span ng-click="authorize.show = false" class="pull-right btn btn-default add-post-btn" type="text">
         Cancel
       </span>
     </form>
@@ -91,17 +94,17 @@
         <h1>Posts</h1>
       </div>
       <ul class="nav nav-tabs pull-left">
-        <li ng-click="posts.sortBy = '-created_at'" role="presentation" data-toggle="tab" class="active">
-          <a href="#/">Newest</a>
-        </li>
-        <li ng-click="posts.sortBy = 'created_at'" role="presentation" data-toggle="tab">
-          <a href="#/">Oldest</a>
-        </li>
-        <li ng-click="posts.sortBy = '-rating'" role="presentation" data-toggle="tab">
+        <li ng-click="posts.sortBy = '-rating'" role="presentation" data-toggle="tab" class="active">
           <a href="#/">Highest</a>
         </li>
         <li ng-click="posts.sortBy = 'rating'" role="presentation" data-toggle="tab">
           <a href="#/">Lowest</a>
+        </li>
+        <li ng-click="posts.sortBy = '-created_at'" role="presentation" data-toggle="tab">
+          <a href="#/">Newest</a>
+        </li>
+        <li ng-click="posts.sortBy = 'created_at'" role="presentation" data-toggle="tab">
+          <a href="#/">Oldest</a>
         </li>
       </ul>
       <button ng-click="showAddPost=true" type="text" class="btn btn-default col-lg-2 add-post pull-right">Add New Post</button>
@@ -144,7 +147,7 @@
             <span class="post-time" am-time-ago="{{ post.created_at }}"></span>
           </small>
         </div>
-        <div class="col-sm-5" ng-style=" {'background-image': 'URL({{ post.image_url }})', 'background-repeat': 'no-repeat', 'border': '1px solid #9098A1', 'background-size': 'cover', 'height': '238px', 'top': '-1px'  }"></div>
+        <a ng-href="{{ post.image_url }}"><div class="col-sm-5" ng-style=" {'background-image': 'URL({{ post.image_url }})', 'background-repeat': 'no-repeat', 'border': '1px solid #9098A1', 'background-size': 'cover', 'height': '238px', 'top': '-1px'  }"></div></a>
         <section class="col-sm-1 votes">
             <i ng-click="posts.upVote(post)" class="glyphicon glyphicon-thumbs-up"></i>
             <p>{{ post.rating }}</p>
@@ -152,3 +155,4 @@
         </section>
     </article>
   </section>
+</div>

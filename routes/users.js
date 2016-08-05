@@ -8,12 +8,13 @@ const bcrypt = require('bcrypt-as-promised');
 
 const ev = require('express-validation');
 const validations = require('../validations/users');
+const { checkAuth } = require('../middleware');
 
 const boom = require('boom');
 const { camelizeKeys, decamelizeKeys } = require('humps');
 
 router.post('/api/users', ev(validations.post), (req, res, next) => {
-  const { username, password, firstName, lastName} = req.body;
+  const { username, email, password} = req.body;
 
   knex('users')
     .select(knex.raw('1=1'))
@@ -27,7 +28,7 @@ router.post('/api/users', ev(validations.post), (req, res, next) => {
       return bcrypt.hash(password, 12);
     })
     .then((hashedPassword) => {
-      const newUser = { username, hashedPassword, firstName, lastName };
+      const newUser = { username, email, hashedPassword };
       const row = decamelizeKeys(newUser);
 
       return knex('users').insert(row, '*');

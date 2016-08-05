@@ -20,13 +20,6 @@ aside {
   position: fixed;
 }
 
-/*img.post-img {
-  border-radius: 5px;
-  height: 200px;
-  position: relative;
-  width: 200px;
-}*/
-
 main .form-control {
   margin-bottom: 5px;
   margin-top: 10px;
@@ -62,12 +55,25 @@ i:hover {
   width: auto;
 }
 
+
+
 .navbar {
   height: 65px;
 }
 
 .navbar-form {
   top: 18px;
+  position: relative;
+}
+
+.logout-lg {
+  right: 15px;
+  top: 26px;
+  position: relative;
+}
+
+.logout-sm {
+  bottom: 26px;
   position: relative;
 }
 

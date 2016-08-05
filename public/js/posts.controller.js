@@ -10,7 +10,7 @@
   function PostsCtrl($http, postsFac) {
     this.posts = [];
     this.filterBy = '';
-    this.sortBy = '-created_at';
+    this.sortBy = '-rating';
 
     this.addPost = () => {
       const newPost = {};
@@ -57,23 +57,30 @@
         });
     };
 
+    this.updatePostRating = (post) => {
+      postsFac.updatePostRating(post)
+        .then((newRating) => {
+          post.rating = newRating.rating
+        })
+        .catch((err) => {
+          throw err;
+        });
+    };
+
     this.upVote = (post) => {
       post.rating += 1;
+      this.updatePostRating(post);
     };
 
     this.downVote = (post) => {
       post.rating -= 1;
+      this.updatePostRating(post);
     };
 
     const activate = () => {
       postsFac.getAllPosts()
         .then((posts) => {
-          this.posts = posts.map((post) => {
-            return Object.assign(post, {
-              created_at: new Date(post.created_at).getTime(),
-              updated_at: new Date(post.updated_at).getTime()
-            });
-          })
+          this.posts = posts;
         })
         .catch((err) => {
           throw err;

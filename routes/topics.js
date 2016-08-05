@@ -8,11 +8,12 @@ const bcrypt = require('bcrypt-as-promised');
 
 const ev = require('express-validation');
 const validations = require('../validations/topics');
+const { checkAuth } = require('../middleware');
 
 const boom = require('boom');
 const { camelizeKeys, decamelizeKeys } = require('humps');
 
-router.post('/api/topics', ev(validations.post), (req, res, next) => {
+router.post('/api/topics', checkAuth, ev(validations.post), (req, res, next) => {
   const { name } = req.body;
 
   knex('topics')

@@ -10,18 +10,14 @@ module.exports.post = {
       .label('Username')
       .trim()
       .required(),
+    email: Joi.string()
+      .max(63)
+      .label('First name')
+      .trim(),
     password: Joi.string()
       .alphanum()
       .label('Password')
       .trim()
-      .required(),
-    firstName: Joi.string()
-      .max(63)
-      .label('First name')
-      .trim(),
-    lastName: Joi.string()
-      .max(63)
-      .label('Last name')
-      .trim()
+      .required()
   }
 };

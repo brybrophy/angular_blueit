@@ -8,11 +8,12 @@ const bcrypt = require('bcrypt-as-promised');
 
 const ev = require('express-validation');
 const validations = require('../validations/posts');
+const { checkAuth } = require('../middleware');
 
 const boom = require('boom');
 const { camelizeKeys, decamelizeKeys } = require('humps');
 
-router.post('/api/posts', ev(validations.post), (req, res, next) => {
+router.post('/api/posts', checkAuth, ev(validations.post), (req, res, next) => {
   const { title, imageUrl, description, userId, topicId } = req.body;
 
   knex('posts')
@@ -68,6 +69,25 @@ router.get('/api/posts/:topicId', (req, res, next) => {
       }
 
       res.send(posts);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.patch('/api/posts/:postId', checkAuth, (req, res, next) => {
+  const postId = Number.parseInt(req.params.postId);
+  const rating = req.body.rating;
+
+  if (Number.isNaN(postId)) {
+    throw boom.create(400, 'Invalid Post Id');
+  };
+
+  knex('posts')
+    .update({ rating }, '*')
+    .where('id', postId)
+    .then((posts) => {
+      res.send(posts[0]);
     })
     .catch((err) => {
       next(err);

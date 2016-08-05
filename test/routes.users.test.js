@@ -35,10 +35,9 @@ suite('Routes Users', () => {
     request(server)
       .post('/api/users')
       .send({
-        username: 'royalBaby',
-        password: 'burgermusic',
-        firstName: 'Gene',
-        lastName: 'Belcher'
+        username: 'geneBelcher',
+        email: 'royalBaby@bobsburger.biz',
+        password: 'burgermusic'
       })
       .expect('Content-Type', /json/)
       .expect((res) => {
@@ -48,9 +47,8 @@ suite('Routes Users', () => {
       })
       .expect(200, {
         id: 2,
-        username: 'royalBaby',
-        first_name: 'Gene',
-        last_name: 'Belcher'
+        username: 'geneBelcher',
+        email: 'royalBaby@bobsburger.biz'
       }, done);
   });
 });
