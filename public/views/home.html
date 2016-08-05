@@ -1,6 +1,6 @@
 <bb-navbar></bb-navbar>
 <div ng-controller="TopicsCtrl as topics">
-  <aside class="col-sm-4 col-md-2">
+  <!-- <aside class="col-sm-4 col-md-2">
 
     <bb-login-aside></bb-login-aside>
 
@@ -56,7 +56,8 @@
         </div>
       </div>
     </section>
-  </aside>
+  </aside> -->
+  <bb-aside></bb-aside>
   <section ng-controller="RegisterCtrl as register" class="col-sm-8 col-md-6 col-md-offset-1 main">
     <form ng-show="authorize.show" ng-submit="register.newUser()" class="row register-form" name="registerForm">
       <label for="userRegister">Username</label>

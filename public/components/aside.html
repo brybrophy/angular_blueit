@@ -1,0 +1,57 @@
+<aside class="col-sm-4 col-md-2">
+
+  <bb-login-aside></bb-login-aside>
+
+  <section class="row">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Topics</div>
+      <div class="panel-body">
+
+        <form novalidate ng-submit="topics.addTopic()" name="topicsForm">
+          <div class="form-group">
+            <label for="search-topics"></label>
+            <div class="input-group">
+              <input ng-model="searchTopics" type="text" class="form-control" name="search-topics" placeholder="Search Topics">
+              <span class="input-group-btn">
+                <button class="btn btn-secondary glyphicon glyphicon-search" type="submit" name="action"></button>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="topicName"></label>
+            <div class="input-group">
+              <input ng-model="topics.topicsForm.topicName" ng-minlength="3" ng-maxlength="20" type="text" class="form-control" name="topicName" placeholder="Add Topic" required>
+              <span class="input-group-btn">
+                <button class="btn btn-secondary glyphicon glyphicon-plus" type="submit" name="action"></button>
+              </span>
+            </div>
+            <div class="has-error" ng-show="topicsForm.topicName.$dirty && topicsForm.topicName.$invalid">
+              <small class="has-error"  ng-show="topicsForm.topicName.$error.required && !topicsForm.topicName.$pristine">
+                Topic Name is required.
+              </small>
+              <small class="error"
+              ng-show="topicsForm.topicName.$error.minlength">
+                Topic names cannot be fewer than 3 characters.
+              </small>
+              <small class="error"
+              ng-show="topicsForm.topicName.$error.maxlength">
+                Topic names cannot be longer than 20 characters.
+              </small>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="list-group">
+        <button ng-click="topics.filterBy = ''" type="button" class="list-group-item">
+         All
+       </button>
+        <button ng-click="topics.filterBy = topic.id" ng-repeat="topic in topics.topics | orderBy: 'name' | filter : searchTopics" type="button" class="list-group-item" ng-cloak>
+          {{ topic.name }}
+        </button>
+      </div>
+    </div>
+  </section>
+</aside>
