@@ -1,0 +1,18 @@
+<form ng-show="authorize.show" ng-submit="register.newUser()" class="row register-form form-border" name="registerForm">
+  <label for="userRegister">Username</label>
+  <input ng-model="register.username" class="form-control" type="text" name="userRegister" placeholder="">
+
+  <label for="userRegister">Email</label>
+  <input ng-model="register.email" class="form-control" type="email" name="emailRegister" placeholder="example@blueit.com">
+
+  <label for="userRegister">Password</label>
+  <input ng-model="register.password" class="form-control" type="password" name="passwordRegister" placeholder="must be 8 or more characters">
+
+  <button ng-click="view.showRegister=false" class="pull-right btn btn-default add-post-btn" type="submit" name="action">
+    Register
+  </button>
+
+  <span ng-click="authorize.show = false" class="pull-right btn btn-default add-post-btn" type="text">
+    Cancel
+  </span>
+</form>

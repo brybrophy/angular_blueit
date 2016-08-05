@@ -1,8 +1,5 @@
-<form ng-if="!authorize.isLoggedIn()" ng-submit="authorize.login()" class="collapse-form hidden-md hidden-lg row" role="search">
+<form ng-if="!authorize.isLoggedIn()" ng-submit="authorize.login()" class="collapse-form hidden-md hidden-lg row form-border" role="search">
   <div class="form-group">
-    <a ng-click="authorize.show = true" class="pull-right" href="#/">
-      Not a member? Register here.
-    </a>
 
     <label for="username"></label>
     <input ng-model="authorize.username" name="username" type="text" class="form-control" placeholder="username">
@@ -14,4 +11,8 @@
   <button type="text" class="btn btn-default pull-right">
     Login
   </button>
+
+  <a ng-click="authorize.show = true" class="pull-left" href="#/">
+    Not a member? Register here.
+  </a>
 </form>

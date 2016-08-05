@@ -20,6 +20,19 @@ aside {
   position: fixed;
 }
 
+aside form {
+  padding: 10px;
+}
+
+aside form.form-border {
+  border-bottom: 1px solid #9098A1;
+  border-top: 1px solid #9098A1;
+}
+
+label {
+  margin-top: 10px;
+}
+
 main .form-control {
   margin-bottom: 5px;
   margin-top: 10px;
@@ -35,6 +48,11 @@ i:hover {
 
 .add-post-form {
   margin: 20px 0 20px 0;
+}
+
+.form-border {
+  border-bottom: 1px solid #9098A1;
+  border-top: 1px solid #9098A1;
 }
 
 .input-group-btn:last-child>.btn {
@@ -55,17 +73,6 @@ i:hover {
   width: auto;
 }
 
-
-
-.navbar {
-  height: 65px;
-}
-
-.navbar-form {
-  top: 10px;
-  position: relative;
-}
-
 .logout-lg {
   right: 15px;
   top: 26px;
@@ -74,6 +81,15 @@ i:hover {
 
 .logout-sm {
   bottom: 26px;
+  position: relative;
+}
+
+.navbar {
+  height: 65px;
+}
+
+.navbar-form {
+  top: 10px;
   position: relative;
 }
 
@@ -107,6 +123,8 @@ div.post-content {
   border-radius: 5px;
   padding: 10px;
 }
+
+
 
 .register-link {
   position: relative;

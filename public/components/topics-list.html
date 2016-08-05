@@ -1,0 +1,8 @@
+<div class="list-group">
+  <button ng-click="topics.filterBy = ''" type="button" class="list-group-item">
+   All
+ </button>
+  <button ng-click="topics.filterBy = topic.id" ng-repeat="topic in topics.topics | orderBy: 'name' | filter : searchTopics" type="button" class="list-group-item" ng-cloak>
+    {{ topic.name }}
+  </button>
+</div>
