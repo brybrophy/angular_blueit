@@ -113,4 +113,31 @@ suite('Routes Posts', () => {
         topic_id: 2
       }, done);
   });
+
+  test('PATCH /api/posts/:postId', (done) => {
+    request(server)
+      .patch('/api/posts/1')
+      .send({
+        title: "Dogs Not Allowed On Subway",
+        image_url: "https://b.thumbs.redditmedia.com/WTeAOJlQ98AfIVn7BjV_cDrDLXMuowwmJVo1p1xX5yg.jpg",
+        description: "What an awesome story.",
+        rating: 10,
+        user_id: 1,
+        topic_id: 1
+      })
+      .expect('Content-Type', /json/)
+      .expect((res) => {
+        delete res.body.created_at;
+        delete res.body.updated_at;
+      })
+      .expect(200, {
+        id: 1,
+        title: "Dogs Not Allowed On Subway",
+        image_url: "https://b.thumbs.redditmedia.com/WTeAOJlQ98AfIVn7BjV_cDrDLXMuowwmJVo1p1xX5yg.jpg",
+        description: "What an awesome story.",
+        rating: 10,
+        user_id: 1,
+        topic_id: 1
+      }, done);
+  });
 });
