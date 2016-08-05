@@ -1,0 +1,17 @@
+<article ng-repeat="post in posts.posts | orderBy : posts.sortBy | filter : { topic_id: topics.filterBy } " class="row">
+    <div class="col-sm-6 post-content">
+      <h4 class="row post-title text-center">
+        "{{ post.title }}"
+      </h4>
+      <p class="row post-description text-center">{{ post.description }}</p>
+      <small class="row pull-left">
+        <span class="post-time" am-time-ago="{{ post.created_at }}"></span>
+      </small>
+    </div>
+    <a ng-href="{{ post.image_url }}"><div class="col-sm-5" ng-style=" {'background-image': 'URL({{ post.image_url }})', 'background-repeat': 'no-repeat', 'border': '1px solid #9098A1', 'background-size': 'cover', 'height': '238px', 'top': '-1px'  }"></div></a>
+    <section class="col-sm-1 votes">
+        <i ng-click="posts.upVote(post)" class="glyphicon glyphicon-thumbs-up"></i>
+        <p>{{ post.rating }}</p>
+        <i ng-click="posts.downVote(post)" class="glyphicon glyphicon-thumbs-down"></i>
+    </section>
+</article>

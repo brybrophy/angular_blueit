@@ -9,70 +9,14 @@
 
 <!-- Points to components/register-form.html -->
     <bb-register-form class="hidden-xs hidden-sm"></bb-register-form>
-    <nav class="row">
-      <div class="col-lg-10">
-        <h1>Posts</h1>
-      </div>
-      <ul class="nav nav-tabs pull-left">
-        <li ng-click="posts.sortBy = '-rating'" role="presentation" data-toggle="tab" class="active">
-          <a href="#/">Highest</a>
-        </li>
-        <li ng-click="posts.sortBy = 'rating'" role="presentation" data-toggle="tab">
-          <a href="#/">Lowest</a>
-        </li>
-        <li ng-click="posts.sortBy = '-created_at'" role="presentation" data-toggle="tab">
-          <a href="#/">Newest</a>
-        </li>
-        <li ng-click="posts.sortBy = 'created_at'" role="presentation" data-toggle="tab">
-          <a href="#/">Oldest</a>
-        </li>
-      </ul>
-      <button ng-click="showAddPost=true" type="text" class="btn btn-default col-lg-2 add-post pull-right">Add New Post</button>
-    </nav>
 
-    <form ng-show="showAddPost"  ng-submit="posts.addPost()" class="row add-post-form" novalidate name="postsForm" role="search">
-      <label for="postTopic">Topic</label>
-      <select name="postTopic" class="form-control" ng-model="posts.topic">
-        <option selected disabled>Choose Topic</option>
-        <option value="{{ topic.id }}" ng-repeat="topic in topics.topics | orderBy : 'name'">
-          {{ topic.name }}
-        </option>
-      </select>
+<!-- Points to components/posts-nav.html -->
+    <bb-posts-nav></bb-posts-nav>
 
-      <label for="postTitle">Title</label>
-      <input ng-model="posts.postsForm.postTitle" name="postTitle" type="text" class="form-control" placeholder="Title">
+<!-- Points to components/posts-form.html -->
+    <bb-posts-form></bb-posts-form>
 
-      <label for="postTitle">Description</label>
-      <input ng-model="posts.postsForm.postDescription" name="postDescription" type="text" class="form-control" placeholder="Description">
-
-      <label for="postImg">Image URL</label>
-      <input ng-model="posts.postsForm.imgUrl" type="text" class="form-control" name="postImg" placeholder="http://www.example.com/image" required>
-
-      <button ng-click="showAddPost=false" class="pull-right btn btn-default add-post-btn" type="submit" name="action">
-        Submit Post
-      </button>
-
-      <span ng-click="showAddPost=false" class="pull-right btn btn-default add-post-btn" type="text">
-        Cancel
-      </span>
-    </form>
-
-    <article ng-repeat="post in posts.posts | orderBy : posts.sortBy | filter : { topic_id: topics.filterBy } " class="row">
-        <div class="col-sm-6 post-content">
-          <h4 class="row post-title text-center">
-            "{{ post.title }}"
-          </h4>
-          <p class="row post-description text-center">{{ post.description }}</p>
-          <small class="row pull-left">
-            <span class="post-time" am-time-ago="{{ post.created_at }}"></span>
-          </small>
-        </div>
-        <a ng-href="{{ post.image_url }}"><div class="col-sm-5" ng-style=" {'background-image': 'URL({{ post.image_url }})', 'background-repeat': 'no-repeat', 'border': '1px solid #9098A1', 'background-size': 'cover', 'height': '238px', 'top': '-1px'  }"></div></a>
-        <section class="col-sm-1 votes">
-            <i ng-click="posts.upVote(post)" class="glyphicon glyphicon-thumbs-up"></i>
-            <p>{{ post.rating }}</p>
-            <i ng-click="posts.downVote(post)" class="glyphicon glyphicon-thumbs-down"></i>
-        </section>
-    </article>
+<!-- Points to components/posts-large.html -->
+    <bb-posts-large></bb-posts-large>
   </section>
 </div>

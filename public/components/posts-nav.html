@@ -1,0 +1,20 @@
+<nav class="row">
+  <div class="col-lg-10">
+    <h1>Posts</h1>
+  </div>
+  <ul class="nav nav-tabs pull-left">
+    <li ng-click="posts.sortBy = '-rating'" role="presentation" data-toggle="tab" class="active">
+      <a href="#/">Highest</a>
+    </li>
+    <li ng-click="posts.sortBy = 'rating'" role="presentation" data-toggle="tab">
+      <a href="#/">Lowest</a>
+    </li>
+    <li ng-click="posts.sortBy = '-created_at'" role="presentation" data-toggle="tab">
+      <a href="#/">Newest</a>
+    </li>
+    <li ng-click="posts.sortBy = 'created_at'" role="presentation" data-toggle="tab">
+      <a href="#/">Oldest</a>
+    </li>
+  </ul>
+  <button ng-click="showAddPost=true" type="text" class="btn btn-default col-lg-2 add-post pull-right">Add New Post</button>
+</nav>

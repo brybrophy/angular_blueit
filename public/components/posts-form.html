@@ -1,0 +1,26 @@
+<form ng-show="showAddPost"  ng-submit="posts.addPost()" class="row add-post-form" novalidate name="postsForm" role="search">
+  <label for="postTopic">Topic</label>
+  <select name="postTopic" class="form-control" ng-model="posts.topic">
+    <option selected disabled>Choose Topic</option>
+    <option value="{{ topic.id }}" ng-repeat="topic in topics.topics | orderBy : 'name'">
+      {{ topic.name }}
+    </option>
+  </select>
+
+  <label for="postTitle">Title</label>
+  <input ng-model="posts.postsForm.postTitle" name="postTitle" type="text" class="form-control" placeholder="Title">
+
+  <label for="postTitle">Description</label>
+  <input ng-model="posts.postsForm.postDescription" name="postDescription" type="text" class="form-control" placeholder="Description">
+
+  <label for="postImg">Image URL</label>
+  <input ng-model="posts.postsForm.imgUrl" type="text" class="form-control" name="postImg" placeholder="http://www.example.com/image" required>
+
+  <button ng-click="showAddPost=false" class="pull-right btn btn-default add-post-btn" type="submit" name="action">
+    Submit Post
+  </button>
+
+  <span ng-click="showAddPost=false" class="pull-right btn btn-default add-post-btn" type="text">
+    Cancel
+  </span>
+</form>
