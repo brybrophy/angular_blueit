@@ -75,7 +75,7 @@ router.get('/api/posts/:topicId', (req, res, next) => {
     });
 });
 
-router.patch('/api/posts/:postId', checkAuth, (req, res, next) => {
+router.patch('/api/posts/:postId', checkAuth, ev(validations.patch), (req, res, next) => {
   const postId = Number.parseInt(req.params.postId);
   const rating = req.body.rating;
 

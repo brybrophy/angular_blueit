@@ -1,0 +1,17 @@
+<form ng-if="!authorize.isLoggedIn()" ng-submit="authorize.login()" class="collapse-form hidden-md hidden-lg row" role="search">
+  <div class="form-group">
+    <a ng-click="authorize.show = true" class="pull-right" href="#/">
+      Not a member? Register here.
+    </a>
+
+    <label for="username"></label>
+    <input ng-model="authorize.username" name="username" type="text" class="form-control" placeholder="username">
+
+    <label for="password"></label>
+    <input ng-model="authorize.password" name="password" type="password" class="form-control" placeholder="password">
+
+  </div>
+  <button type="text" class="btn btn-default pull-right">
+    Login
+  </button>
+</form>

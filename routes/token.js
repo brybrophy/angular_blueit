@@ -42,6 +42,7 @@ router.post('/api/token', (req, res, next) => {
         expires: expiry,
         secure: router.get('env') === 'production'
       });
+      
       res.sendStatus(200);
     })
     .catch(bcrypt.MISMATCH_ERROR, () => {
