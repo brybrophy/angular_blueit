@@ -84,6 +84,13 @@ i:hover {
   position: relative;
 }
 
+.main form {
+  background-color: #f5f5f5;
+  border: 2px solid #9098A1;
+  border-radius: 5px;
+  padding: 10px;
+}
+
 .navbar {
   height: 65px;
 }
@@ -98,7 +105,7 @@ div.post-content {
 }
 
 .post-description {
-  height: 40px;
+  height: 30px;
 }
 
 .post-time {
@@ -116,15 +123,6 @@ div.post-content {
 .push-right {
   margin-left: 10px;
 }
-
-.main form {
-  background-color: #f5f5f5;
-  border: 2px solid #9098A1;
-  border-radius: 5px;
-  padding: 10px;
-}
-
-
 
 .register-link {
   position: relative;
