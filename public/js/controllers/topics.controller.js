@@ -5,10 +5,15 @@
 
   app.controller('TopicsCtrl', TopicsCtrl);
 
-  TopicsCtrl.$inject = ['topicsFac'];
+  TopicsCtrl.$inject = ['topicsFac', '$cookies'];
 
-  function TopicsCtrl(topicsFac) {
+  function TopicsCtrl(topicsFac, $cookies) {
     this.topics = [];
+    this.pleaseLogin = '';
+
+    this.isLoggedIn = () => {
+      return $cookies.get('loggedIn');
+    };
 
     this.addTopic = (topicsForm) => {
       this.newTopic = {};
@@ -28,9 +33,14 @@
 
       topicsFac.addTopic(this.newTopic)
         .then((topic) => {
+          this.pleaseLogin = '';
           this.topics.push(topic)
         })
         .catch((err) => {
+          if (err.status === 401) {
+            this.pleaseLogin = 'Please login to use this feature';
+          }
+
           throw err;
         });
 

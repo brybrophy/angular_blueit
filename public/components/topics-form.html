@@ -22,5 +22,7 @@
         <small ng-message="maxlength">Topic name is too long.</small>
         <small ng-message="required">Topic name is required.</small>
     </div>
+
+    <small ng-show="!topics.isLoggedIn()" class="error">{{ topics.pleaseLogin }}</small>
   </div>
 </form>

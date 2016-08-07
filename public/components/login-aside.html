@@ -1,4 +1,4 @@
-<form ng-if="!authorize.isLoggedIn()" ng-submit="authorize.login(loginForm)" class="collapse-form hidden-md hidden-lg row form-border" name="loginForm" role="search">
+<form ng-if="!authorize.isLoggedIn(topics)" ng-submit="authorize.login(loginForm)" class="collapse-form hidden-md hidden-lg row form-border" name="loginForm" role="search">
   <div class="form-group" ng-class="{ 'has-error': (loginForm.username.$dirty && loginForm.username.$invalid) || (loginForm.password.$dirty && loginForm.password.$invalid)}">
 
     <label for="username"></label>
