@@ -2,23 +2,39 @@
   <button ng-if="authorize.isLoggedIn()" ng-click="authorize.logout()" class="btn btn-default pull-right logout-sm hidden-sm hidden-md hidden-lg">
     Logout
   </button>
-  <form ng-if="!authorize.isLoggedIn()" ng-submit="authorize.login()" class="navbar-form navbar-right hidden-sm hidden-xs" role="search">
-    <div class="form-group">
+
+  <form novalidate ng-if="!authorize.isLoggedIn()" ng-submit="authorize.login(loginForm)" class="navbar-form navbar-right hidden-sm hidden-xs" role="search" name="loginForm">
+    <div class="form-group" ng-class="{ 'has-error': (loginForm.username.$dirty && loginForm.username.$invalid) || (loginForm.password.$dirty && loginForm.password.$invalid)}">
       <a ng-click="authorize.show = true" class="register-link" ng-href="#/" target="_self">
         Not a member? Register here.
       </a>
 
       <label for="username"></label>
-      <input ng-model="authorize.username" name="username" type="text" class="form-control" placeholder="username">
+      <input ng-model="authorize.loginForm.username" name="username" type="text" class="form-control" placeholder="username" required>
 
       <label for="password"></label>
-      <input ng-model="authorize.password" name="password" type="password" class="form-control" placeholder="password">
+      <input ng-model="authorize.loginForm.password" name="password" type="password" class="form-control" placeholder="password" required>
     </div>
-    <button type="submit" class="btn btn-default">
+
+    <button ng-disabled="loginForm.$invalid" type="submit" class="btn btn-default">
       Login
     </button>
+
+    <div ng-messages="loginForm.username.$error || loginForm.password.$error"  ng-show="!loginForm.username.$pristine" class="login-error username-error">
+      <small ng-message="required">* required field missing</small>
+    </div>
+
+    <div ng-messages="loginForm.password.$error" ng-show="!loginForm.password.$pristine" ng-class="{ 'push-up': loginForm.username.$dirty && loginForm.username.$invalid }" class="login-error password-error">
+      <small ng-message="required">* required field missing</small>
+    </div>
+
+    <div class="info-error">
+      <small>{{ authorize.couldNotLogIn }}</small>
+    </div>
+
   </form>
   <button ng-if="authorize.isLoggedIn()" ng-click="authorize.logout()" class="btn btn-default navbar-right logout-lg hidden-xs">
     Logout
   </button>
+
 </div>

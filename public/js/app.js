@@ -1,6 +1,6 @@
 (function() {
   'use strict';
 
-  angular.module('blueitApp', ['angularMoment', 'ngRoute', 'ngCookies']);
+  angular.module('blueitApp', ['angularMoment', 'ngRoute', 'ngCookies', 'ngMessages']);
 
 })();

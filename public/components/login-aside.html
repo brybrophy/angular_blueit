@@ -1,14 +1,26 @@
-<form ng-if="!authorize.isLoggedIn()" ng-submit="authorize.login()" class="collapse-form hidden-md hidden-lg row form-border" role="search">
-  <div class="form-group">
+<form ng-if="!authorize.isLoggedIn()" ng-submit="authorize.login(loginForm)" class="collapse-form hidden-md hidden-lg row form-border" name="loginForm" role="search">
+  <div class="form-group" ng-class="{ 'has-error': (loginForm.username.$dirty && loginForm.username.$invalid) || (loginForm.password.$dirty && loginForm.password.$invalid)}">
 
     <label for="username"></label>
-    <input ng-model="authorize.username" name="username" type="text" class="form-control" placeholder="username">
+    <input ng-model="authorize.loginForm.username" name="username" type="text" class="form-control" placeholder="username" required>
+
+    <div ng-messages="loginForm.username.$error" ng-show="!loginForm.username.$pristine" class="login-error">
+      <small ng-message="required">* required field missing</small>
+    </div>
 
     <label for="password"></label>
-    <input ng-model="authorize.password" name="password" type="password" class="form-control" placeholder="password">
+    <input ng-model="authorize.loginForm.password" name="password" type="password" class="form-control" placeholder="password" required>
 
+    <div ng-messages="loginForm.password.$error" ng-show="!loginForm.password.$pristine" class="login-error">
+      <small ng-message="required">* required field missing</small>
+    </div>
+
+    <div class="login-error">
+      <small>{{ authorize.couldNotLogIn }}</small>
+    </div>
   </div>
-  <button type="text" class="btn btn-default pull-right">
+
+  <button ng-disabled="loginForm.$invalid" type="text" class="btn btn-default pull-right">
     Login
   </button>
 

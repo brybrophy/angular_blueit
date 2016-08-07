@@ -10,7 +10,7 @@
   function TopicsCtrl(topicsFac) {
     this.topics = [];
 
-    this.addTopic = () => {
+    this.addTopic = (topicsForm) => {
       this.newTopic = {};
 
       const topicName = this.topicsForm.topicName.replace(/\w\S*/g,(txt) => {
@@ -36,6 +36,8 @@
 
       this.topicsForm.topicName = '';
       this.newTopic = {};
+      topicsForm.$setPristine();
+      topicsForm.$setUntouched();
     };
 
     const activate = () => {

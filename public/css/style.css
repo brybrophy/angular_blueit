@@ -66,6 +66,18 @@ i:hover {
   background-color: transparent;
 }
 
+.info-error {
+  color: #d9534f;
+  left: 200px;
+  position: relative;
+}
+
+.login-error {
+  color: #d9534f;
+  margin: 0;
+  width: 150px;
+}
+
 .logo.img-responsive{
   bottom: 4px;
   height: inherit;
@@ -100,6 +112,11 @@ i:hover {
   position: relative;
 }
 
+.password-error {
+  left: 385px;
+  position: relative;
+}
+
 div.post-content {
   padding: 0 30px 0 30px;
 }
@@ -124,6 +141,10 @@ div.post-content {
   margin-left: 10px;
 }
 
+.push-up {
+  bottom: 19px;
+}
+
 .register-link {
   position: relative;
   bottom:30px;
@@ -140,4 +161,9 @@ div.post-content {
   height: 237px;
   padding: 60px 0 0 0;
   text-align: center;
+}
+
+.username-error {
+  left: 200px;
+  position: relative;
 }

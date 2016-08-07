@@ -1,34 +1,26 @@
-<form novalidate ng-submit="topics.addTopic()" name="topicsForm">
+<form novalidate ng-submit="topics.addTopic(topicsForm)" name="topicsForm">
   <div class="form-group">
     <label for="search-topics"></label>
     <div class="input-group">
       <input ng-model="searchTopics" type="text" class="form-control" name="search-topics" placeholder="Search Topics">
       <span class="input-group-btn">
-        <button class="btn btn-secondary glyphicon glyphicon-search" type="submit" name="action"></button>
+        <button class="btn btn-secondary glyphicon glyphicon-search" type="text" name="action"></button>
       </span>
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" ng-class="{ 'has-error': topicsForm.topicName.$touched && topicsForm.topicName.$invalid }">
     <label for="topicName"></label>
     <div class="input-group">
       <input ng-model="topics.topicsForm.topicName" ng-minlength="3" ng-maxlength="20" type="text" class="form-control" name="topicName" placeholder="Add Topic" required>
       <span class="input-group-btn">
-        <button class="btn btn-secondary glyphicon glyphicon-plus" type="submit" name="action"></button>
+        <button ng-disabled="topicsForm.$invalid" class="btn btn-secondary glyphicon glyphicon-plus" type="submit" name="action"></button>
       </span>
     </div>
-    <div class="has-error" ng-show="topicsForm.topicName.$dirty && topicsForm.topicName.$invalid">
-      <small class="has-error"  ng-show="topicsForm.topicName.$error.required && !topicsForm.topicName.$pristine">
-        Topic Name is required.
-      </small>
-      <small class="error"
-      ng-show="topicsForm.topicName.$error.minlength">
-        Topic names cannot be fewer than 3 characters.
-      </small>
-      <small class="error"
-      ng-show="topicsForm.topicName.$error.maxlength">
-        Topic names cannot be longer than 20 characters.
-      </small>
+    <div ng-messages="topicsForm.topicName.$error" ng-show="!topicsForm.topicName.$pristine">
+        <small ng-message="minlength">Topic name is too short.</small>
+        <small ng-message="maxlength">Topic name is too long.</small>
+        <small ng-message="required">Topic name is required.</small>
     </div>
   </div>
 </form>
