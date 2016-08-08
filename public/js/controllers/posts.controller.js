@@ -59,6 +59,8 @@
           this.posts.push(post);
           this.postsForm.postTitle = '';
           this.postsForm.imgUrl = '';
+          this.postsForm.description = '';
+          this.topic = '0';
           this.button = 'Close'
           this.success = 'Post created!'
           this.mustLogInNew = '';
