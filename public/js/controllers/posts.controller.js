@@ -14,6 +14,7 @@
     this.button = 'Cancel';
     this.mustLogInNew = '';
     this.success = '';
+    this.topic = '0';
 
     this.addPost = (postsForm) => {
       const newPost = {};
@@ -74,6 +75,7 @@
           post.rating = newRating.rating
         })
         .catch((err) => {
+          post.rating -= 1;
           throw err;
         });
     };

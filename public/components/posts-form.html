@@ -2,7 +2,7 @@
 
   <label for="topic">Topic</label>
   <select name="topic" class="form-control" ng-model="posts.topic" required>
-    <option ng-selected="selected" disabled>Choose Topic</option>
+    <option value="0" selected disabled>Choose Topic</option>
     <option value="{{ topic.id }}" ng-repeat="topic in topics.topics | orderBy : 'name'">
       {{ topic.name }}
     </option>
