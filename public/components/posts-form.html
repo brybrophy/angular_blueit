@@ -1,26 +1,51 @@
-<form ng-show="showAddPost"  ng-submit="posts.addPost()" class="row add-post-form" novalidate name="postsForm" role="search">
-  <label for="postTopic">Topic</label>
-  <select name="postTopic" class="form-control" ng-model="posts.topic">
-    <option selected disabled>Choose Topic</option>
+<form ng-show="showAddPost"  ng-submit="posts.addPost(postsForm)" class="row add-post-form" novalidate name="postsForm" role="search" ng-class="{ 'has-error': (postsForm.title.$dirty && postsForm.title.$invalid) || (postsForm.description.$dirty && postsForm.description.$invalid) || (postsForm.imgUrl.$dirty && postsForm.imgUrl.$invalid)}">
+
+  <label for="topic">Topic</label>
+  <select name="topic" class="form-control" ng-model="posts.topic" required>
+    <option ng-selected="selected" disabled>Choose Topic</option>
     <option value="{{ topic.id }}" ng-repeat="topic in topics.topics | orderBy : 'name'">
       {{ topic.name }}
     </option>
   </select>
 
-  <label for="postTitle">Title</label>
-  <input ng-model="posts.postsForm.postTitle" name="postTitle" type="text" class="form-control" placeholder="Title">
+  <div ng-messages="postsForm.topic.$error"  ng-show="!postsForm.topic.$error.required" class="error">
+    <small ng-message="required">* required field missing</small>
+  </div>
 
-  <label for="postTitle">Description</label>
-  <input ng-model="posts.postsForm.postDescription" name="postDescription" type="text" class="form-control" placeholder="Description">
+  <label for="title">Title</label>
+  <input ng-model="posts.postsForm.postTitle" name="title" type="text" class="form-control" placeholder="Title" ng-minlength="3" ng-maxlength="28" required>
 
-  <label for="postImg">Image URL</label>
-  <input ng-model="posts.postsForm.imgUrl" type="text" class="form-control" name="postImg" placeholder="http://www.example.com/image" required>
+  <div ng-messages="postsForm.title.$error"  ng-show="!postsForm.title.$pristine" class="error">
+    <small ng-message="required">* required field missing</small>
+    <small ng-message="minlength">* title too short</small>
+    <small ng-message="maxlength">* title too long</small>
+  </div>
 
-  <button ng-click="showAddPost=false" class="pull-right btn btn-default add-post-btn" type="submit" name="action">
+  <label for="description">Description</label>
+  <input ng-model="posts.postsForm.postDescription" name="description" type="text" class="form-control" placeholder="Description" ng-minlength="3" ng-maxlength="60" required>
+
+  <div ng-messages="postsForm.description.$error"  ng-show="!postsForm.description.$pristine" class="error">
+    <small ng-message="required">* required field missing</small>
+    <small ng-message="minlength">* description too short</small>
+    <small ng-message="maxlength">* description too long</small>
+  </div>
+
+  <label for="imgUrl">Image URL</label>
+  <input ng-model="posts.postsForm.imgUrl" type="url" class="form-control" name="imgUrl" placeholder="http://www.example.com/image" required>
+
+  <div ng-messages="postsForm.imgUrl.$error"  ng-show="!postsForm.imgUrl.$pristine" class="error">
+    <small ng-message="required">* required field missing</small>
+    <small ng-message="url">* invalid URL</small>
+  </div>
+
+  <small class="error">{{ posts.mustLogInNew }}</small>
+  <small class="success">{{ posts.success }}</small>
+
+  <button ng-disabled="postsForm.$invalid" class="pull-right btn btn-default add-post-btn" type="submit" name="action">
     Submit Post
   </button>
 
   <span ng-click="showAddPost=false" class="pull-right btn btn-default add-post-btn" type="text">
-    Cancel
+    {{ posts.button }}
   </span>
 </form>

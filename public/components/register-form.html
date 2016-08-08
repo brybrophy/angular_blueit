@@ -1,18 +1,39 @@
-<form ng-show="authorize.show" ng-submit="register.newUser()" class="row register-form form-border" name="registerForm">
-  <label for="userRegister">Username</label>
-  <input ng-model="register.username" class="form-control" type="text" name="userRegister" placeholder="">
+<form ng-show="authorize.show" ng-submit="register.newUser(registerForm)" class="row register-form form-border" name="registerForm" ng-class="{ 'has-error': (registerForm.username.$dirty && registerForm.username.$invalid) || (registerForm.password.$dirty && registerForm.password.$invalid) || (registerForm.email.$dirty && registerForm.email.$invalid)}">
 
-  <label for="userRegister">Email</label>
-  <input ng-model="register.email" class="form-control" type="email" name="emailRegister" placeholder="example@blueit.com">
+  <label for="username">Username</label>
+  <input ng-model="register.username" class="form-control" type="text" name="username" placeholder="" ng-minlength="3" ng-maxlength="15" required>
 
-  <label for="userRegister">Password</label>
-  <input ng-model="register.password" class="form-control" type="password" name="passwordRegister" placeholder="must be 8 or more characters">
+  <div ng-messages="registerForm.username.$error"  ng-show="!registerForm.username.$pristine" class="error">
+    <small ng-message="required">* required field missing</small>
+    <small ng-message="minlength">* username too short</small>
+    <small ng-message="maxlength">* username too long</small>
+  </div>
 
-  <button ng-click="view.showRegister=false" class="pull-right btn btn-default add-post-btn" type="submit" name="action">
+  <label for="email">Email</label>
+  <input ng-model="register.email" class="form-control" type="email" name="email" placeholder="example@blueit.com" ng-minlength="3" required>
+
+  <div ng-messages="registerForm.email.$error"  ng-show="!registerForm.email.$pristine" class="error">
+    <small ng-message="required">* required field missing</small>
+    <small ng-message="email">* invalid email</small>
+  </div>
+
+  <label for="password">Password</label>
+  <input ng-model="register.password" class="form-control" type="password" name="password" placeholder="must be 8 or more characters" ng-minlength=8 required>
+
+  <div ng-messages="registerForm.password.$error"  ng-show="!registerForm.password.$pristine" class="error">
+    <small ng-message="required">* required field missing</small>
+    <small ng-message="minlength">* password too short</small>
+  </div>
+
+  <small class="error">{{ register.couldNotRegister }}</small>
+  <small class="success">{{ register.registered }}</small>
+
+
+  <button ng-click="view.showRegister=false" ng-disabled="registerForm.$invalid" class="pull-right btn btn-default add-post-btn" type="submit" name="action">
     Register
   </button>
 
   <span ng-click="authorize.show = false" class="pull-right btn btn-default add-post-btn" type="text">
-    Cancel
+    {{ register.button }}
   </span>
 </form>

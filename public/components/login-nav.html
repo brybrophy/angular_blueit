@@ -20,11 +20,11 @@
       Login
     </button>
 
-    <div ng-messages="loginForm.username.$error || loginForm.password.$error"  ng-show="!loginForm.username.$pristine" class="login-error username-error">
+    <div ng-messages="loginForm.username.$error || loginForm.password.$error"  ng-show="!loginForm.username.$pristine" class="error username-error">
       <small ng-message="required">* required field missing</small>
     </div>
 
-    <div ng-messages="loginForm.password.$error" ng-show="!loginForm.password.$pristine" ng-class="{ 'push-up': loginForm.username.$dirty && loginForm.username.$invalid }" class="login-error password-error">
+    <div ng-messages="loginForm.password.$error" ng-show="!loginForm.password.$pristine" ng-class="{ 'push-up': loginForm.username.$dirty && loginForm.username.$invalid }" class="error password-error">
       <small ng-message="required">* required field missing</small>
     </div>
 

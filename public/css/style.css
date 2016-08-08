@@ -149,6 +149,10 @@ div.post-content {
   left: 420px;
 }
 
+.success {
+  color: #5cb85c;
+}
+
 .votes {
   color: #2D3032;
   background-color: white;

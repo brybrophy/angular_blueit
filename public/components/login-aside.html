@@ -4,18 +4,18 @@
     <label for="username"></label>
     <input ng-model="authorize.loginForm.username" name="username" type="text" class="form-control" placeholder="username" required>
 
-    <div ng-messages="loginForm.username.$error" ng-show="!loginForm.username.$pristine" class="login-error">
+    <div ng-messages="loginForm.username.$error" ng-show="!loginForm.username.$pristine" class="error">
       <small ng-message="required">* required field missing</small>
     </div>
 
     <label for="password"></label>
     <input ng-model="authorize.loginForm.password" name="password" type="password" class="form-control" placeholder="password" required>
 
-    <div ng-messages="loginForm.password.$error" ng-show="!loginForm.password.$pristine" class="login-error">
+    <div ng-messages="loginForm.password.$error" ng-show="!loginForm.password.$pristine" class="error">
       <small ng-message="required">* required field missing</small>
     </div>
 
-    <div class="login-error">
+    <div class="error">
       <small>{{ authorize.couldNotLogIn }}</small>
     </div>
   </div>

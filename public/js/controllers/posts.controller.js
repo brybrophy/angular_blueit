@@ -11,8 +11,11 @@
     this.posts = [];
     this.filterBy = '';
     this.sortBy = '-rating';
+    this.button = 'Cancel';
+    this.mustLogInNew = '';
+    this.success = '';
 
-    this.addPost = () => {
+    this.addPost = (postsForm) => {
       const newPost = {};
 
       const regEx = /^http/g;
@@ -51,8 +54,16 @@
           this.posts.push(post);
           this.postsForm.postTitle = '';
           this.postsForm.imgUrl = '';
+          this.button = 'Close'
+          this.success = 'Post created!'
+          this.mustLogInNew = '';
+          postsForm.$setPristine();
         })
         .catch((err) => {
+          if (err.status === 401) {
+            this.mustLogInNew = 'Must be logged in to use this feature.'
+          }
+
           throw err;
         });
     };
