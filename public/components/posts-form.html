@@ -22,7 +22,7 @@
   </div>
 
   <label for="description">Description</label>
-  <input ng-model="posts.postsForm.description" name="description" type="text" class="form-control" placeholder="Description" ng-minlength="3" ng-maxlength="90" required>
+  <input ng-model="posts.postsForm.description" name="description" type="text" class="form-control" placeholder="Description" ng-minlength="3" ng-maxlength="150" required>
 
   <div ng-messages="postsForm.description.$error"  ng-show="!postsForm.description.$pristine" class="error">
     <small ng-message="required">* required field missing</small>
