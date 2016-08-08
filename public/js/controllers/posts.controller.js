@@ -46,7 +46,7 @@
       }
 
       newPost.title = postTitle;
-      newPost.description = this.postsForm.postDescription
+      newPost.description = this.postsForm.description;
       newPost.imageUrl = imgUrl;
       newPost.rating = 0;
       newPost.userId = 1;
