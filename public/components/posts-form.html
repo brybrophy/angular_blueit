@@ -13,7 +13,7 @@
   </div>
 
   <label for="title">Title</label>
-  <input ng-model="posts.postsForm.postTitle" name="title" type="text" class="form-control" placeholder="Title" ng-minlength="3" ng-maxlength="28" required>
+  <input ng-model="posts.postsForm.postTitle" name="title" type="text" class="form-control" placeholder="Title" ng-minlength="3" ng-maxlength="32" required>
 
   <div ng-messages="postsForm.title.$error"  ng-show="!postsForm.title.$pristine" class="error">
     <small ng-message="required">* required field missing</small>
@@ -22,7 +22,7 @@
   </div>
 
   <label for="description">Description</label>
-  <input ng-model="posts.postsForm.description" name="description" type="text" class="form-control" placeholder="Description" ng-minlength="3" ng-maxlength="60" required>
+  <input ng-model="posts.postsForm.description" name="description" type="text" class="form-control" placeholder="Description" ng-minlength="3" ng-maxlength="90" required>
 
   <div ng-messages="postsForm.description.$error"  ng-show="!postsForm.description.$pristine" class="error">
     <small ng-message="required">* required field missing</small>
