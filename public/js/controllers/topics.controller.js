@@ -10,6 +10,7 @@
   function TopicsCtrl(topicsFac, $cookies) {
     this.topics = [];
     this.pleaseLogin = '';
+    this.alreadyThere = '';
 
     this.isLoggedIn = () => {
       return $cookies.get('loggedIn');
@@ -24,11 +25,14 @@
 
       for (const topic of this.topics) {
         if (topic.name === topicName) {
+          this.topicsForm.topicName = '';
+          topicsForm.$setPristine();
 
-          return this.topicsForm.topicName = 'Topic already exists';
+          return this.alreadyThere =  'Topic already exists';
         }
       };
 
+      this.alreadyThere = '';
       this.newTopic.name = topicName;
 
       topicsFac.addTopic(this.newTopic)
