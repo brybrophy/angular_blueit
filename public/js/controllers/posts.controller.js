@@ -16,6 +16,10 @@
     this.success = '';
     this.topic = '0';
 
+    for (const post of this.posts) {
+      post.mustLogInVote = '';
+    };
+
     this.addPost = (postsForm) => {
       const newPost = {};
 
@@ -69,25 +73,40 @@
         });
     };
 
-    this.updatePostRating = (post) => {
+    this.updatePostRatingUp = (post) => {
       postsFac.updatePostRating(post)
         .then((newRating) => {
           post.rating = newRating.rating
+          post.mustLogInVote = '';
         })
         .catch((err) => {
+          post.mustLogInVote = 'Must be logged in to use this feature.';
           post.rating -= 1;
+          throw err;
+        });
+    };
+
+    this.updatePostRatingDown = (post) => {
+      postsFac.updatePostRating(post)
+        .then((newRating) => {
+          post.rating = newRating.rating
+          post.mustLogInVote = '';
+        })
+        .catch((err) => {
+          post.mustLogInVote = 'Must be logged in to use this feature.';
+          post.rating += 1;
           throw err;
         });
     };
 
     this.upVote = (post) => {
       post.rating += 1;
-      this.updatePostRating(post);
+      this.updatePostRatingUp(post);
     };
 
     this.downVote = (post) => {
       post.rating -= 1;
-      this.updatePostRating(post);
+      this.updatePostRatingDown(post);
     };
 
     const activate = () => {
