@@ -79,18 +79,7 @@
         });
     };
 
-    this.updatePostRatingUp = (post) => {
-      postsFac.updatePostRating(post)
-        .then((newRating) => {
-          post.rating = newRating.rating
-          post.mustLogInVote = '';
-        })
-        .catch((err) => {
-          throw err;
-        });
-    };
-
-    this.updatePostRatingDown = (post) => {
+    this.updatePostRating = (post) => {
       postsFac.updatePostRating(post)
         .then((newRating) => {
           post.rating = newRating.rating
@@ -106,7 +95,7 @@
         return post.mustLogInVote = 'Must be logged in to use this feature.';
       }
       post.rating += 1;
-      this.updatePostRatingUp(post);
+      this.updatePostRating(post);
     };
 
     this.downVote = (post) => {
@@ -114,7 +103,7 @@
         return post.mustLogInVote = 'Must be logged in to use this feature.';
       }
       post.rating -= 1;
-      this.updatePostRatingDown(post);
+      this.updatePostRating(post);
     };
 
     const activate = () => {
