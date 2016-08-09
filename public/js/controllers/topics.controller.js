@@ -9,6 +9,7 @@
 
   function TopicsCtrl(topicsFac, $cookies) {
     this.topics = [];
+    this.filterBy = '';
     this.pleaseLogin = '';
     this.alreadyThere = '';
 
