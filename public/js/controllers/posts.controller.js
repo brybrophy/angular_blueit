@@ -21,7 +21,7 @@
     };
 
     this.isLoggedIn = () => {
-      return $cookie.get('loggedIn');
+      return $cookies.get('loggedIn');
     };
 
     this.addPost = (postsForm) => {
@@ -86,8 +86,6 @@
           post.mustLogInVote = '';
         })
         .catch((err) => {
-          post.mustLogInVote = 'Must be logged in to use this feature.';
-          post.rating -= 1;
           throw err;
         });
     };
@@ -99,18 +97,22 @@
           post.mustLogInVote = '';
         })
         .catch((err) => {
-          post.mustLogInVote = 'Must be logged in to use this feature.';
-          post.rating += 1;
           throw err;
         });
     };
 
     this.upVote = (post) => {
+      if (!this.isLoggedIn()) {
+        return post.mustLogInVote = 'Must be logged in to use this feature.';
+      }
       post.rating += 1;
       this.updatePostRatingUp(post);
     };
 
     this.downVote = (post) => {
+      if (!this.isLoggedIn()) {
+        return post.mustLogInVote = 'Must be logged in to use this feature.';
+      }
       post.rating -= 1;
       this.updatePostRatingDown(post);
     };
