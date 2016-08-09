@@ -33,7 +33,11 @@
     Register
   </button>
 
-  <span ng-click="authorize.show = false" class="pull-right btn btn-default add-post-btn" type="text">
+  <span ng-click="authorize.show = false" class="pull-right btn btn-default add-post-btn hidden-xs" type="text">
     {{ register.button }}
+  </span>
+
+  <span ng-click="authorize.show = false" class="pull-right btn btn-default add-post-btn hidden-sm hidden-md hidden-lg" type="text">
+    Close
   </span>
 </form>
