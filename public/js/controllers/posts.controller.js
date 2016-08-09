@@ -5,12 +5,12 @@
 
   app.controller('PostsCtrl', PostsCtrl);
 
-  PostsCtrl.$inject = ['$http', 'postsFac'];
+  PostsCtrl.$inject = ['$http', 'postsFac', '$cookies'];
 
-  function PostsCtrl($http, postsFac) {
+  function PostsCtrl($http, postsFac, $cookies) {
     this.posts = [];
     this.filterBy = '';
-    this.sortBy = '-rating';
+    this.sortBy = '-created_at';
     this.button = 'Cancel';
     this.mustLogInNew = '';
     this.success = '';
@@ -18,6 +18,10 @@
 
     for (const post of this.posts) {
       post.mustLogInVote = '';
+    };
+
+    this.isLoggedIn = () => {
+      return $cookie.get('loggedIn');
     };
 
     this.addPost = (postsForm) => {

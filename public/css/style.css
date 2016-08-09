@@ -1,12 +1,9 @@
 article {
+  background-color: #f8f8f8;
   border: 2px solid #9098A1;
   border-radius: 5px;
-  height: 240px;
-}
-
-article, .header {
-  background-color: #D3E0F0;
   color: #2D3032;
+  height: 240px;
 }
 
 article, p {
@@ -43,11 +40,19 @@ i:hover {
 }
 
 .add-post-btn {
-  margin: 5px 0 0 10px;
+  margin-left: 10px;
+}
+
+button.add-post-small {
+  margin-bottom: 20px;
 }
 
 .add-post-form {
   margin: 20px 0 20px 0;
+}
+
+.row.add-post-form-small {
+  margin: 0;
 }
 
 .error {
@@ -123,6 +128,10 @@ div.post-content {
   height: 30px;
 }
 
+.post-description-small {
+  margin: 0 20px;
+}
+
 .post-time {
   font-size: 80%;
   right: 5px;
@@ -130,9 +139,23 @@ div.post-content {
   top: 120px;
 }
 
+.post-time-small {
+  font-size: 80%;
+  left: 25px;
+  position: relative;
+}
+
 .post-title {
   position: relative;
   right: 10px;
+}
+
+.post-title-small {
+  margin: 15px auto;
+}
+
+.posts-nav-small {
+  padding: 0 20px;
 }
 
 .push-right {
@@ -162,12 +185,34 @@ div.post-content {
   font-size: 3.2rem;
   height: 237px;
   padding: 60px 0 0 0;
+
+}
+
+.votes-small {
+  color: #2D3032;
+  background-color: white;
+  font-size: 3.2rem;
   text-align: center;
+}
+
+.votes-small>p {
+  bottom: 10px;
+  display: inline-block;
+  margin-bottom: 0;
+  margin-top: 25px;
+  position: relative;
 }
 
 .vote-error {
   font-size: 1rem;
   left: 80px;
+  position: relative;
+  top: 115px;
+}
+
+.vote-error-small {
+  font-size: 1rem;
+  /*left: 100px;*/
   position: relative;
   top: 115px;
 }

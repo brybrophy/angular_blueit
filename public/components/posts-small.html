@@ -1,0 +1,47 @@
+<!-- <article ng-repeat="post in posts.posts | orderBy : posts.sortBy | filter : { topic_id: topics.filterBy } " class="row">
+  <div class="col-sm-12">
+    <a ng-href="{{ post.image_url }}">
+      <div ng-style=" {'background-image': 'URL({{ post.image_url }})', 'background-repeat': 'no-repeat', 'background-size': 'cover', 'height': '238px', 'top': '-1px'  }"></div>
+    </a>
+  </div>
+
+  <div class="col-sm-12">
+    <h4 class="row post-title text-center">
+      "{{ post.title }}"
+    </h4>
+    <p class="post-description text-center">{{ post.description }}</p>
+    <small class="">
+      <span class="post-time" am-time-ago="{{ post.created_at }}"></span>
+    </small>
+
+    <small ng-show="!posts.isLoggedIn()" class="error vote-error">{{ post.mustLogInVote }}</small>
+  </div>
+  <section class="col-sm-12 votes">
+    <i ng-click="posts.upVote(post)" class="glyphicon glyphicon-thumbs-up"></i>
+    <p>{{ post.rating }}</p>
+    <i ng-click="posts.downVote(post)" class="glyphicon glyphicon-thumbs-down"></i>
+  </section>
+</article> -->
+
+<artice ng-repeat="post in posts.posts | orderBy : posts.sortBy | filter : { topic_id: topics.filterBy }">
+  <div class="row">
+    <a ng-href="{{ post.image_url }}">
+      <div ng-style=" {'background-image': 'URL({{ post.image_url }})', 'background-repeat': 'no-repeat', 'background-size': 'cover', 'height': '238px', 'width': '100%' }" class="col-sm-12"></div>
+    </a>
+  </div>
+  <div class="row">
+    <h4 class="post-title post-title-small text-center">
+      "{{ post.title }}"
+    </h4>
+    <p class="text-center post-description-small">{{ post.description }}</p>
+    <section class="votes-small">
+      <i ng-click="posts.upVote(post)" class="glyphicon glyphicon-thumbs-up"></i>
+      <p>{{ post.rating }}</p>
+      <i ng-click="posts.downVote(post)" class="glyphicon glyphicon-thumbs-down"></i>
+    </section>
+    <small class="">
+      <span class="post-time-small" am-time-ago="{{ post.created_at }}"></span>
+    </small>
+    <small ng-show="!posts.isLoggedIn()" class="error vote-error-small">{{ post.mustLogInVote }}</small>
+  </div>
+</artice>

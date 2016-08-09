@@ -8,7 +8,7 @@
         <span class="post-time" am-time-ago="{{ post.created_at }}"></span>
       </small>
 
-      <small class="error vote-error">{{ post.mustLogInVote }}</small>
+      <small ng-show="!posts.isLoggedIn()" class="error vote-error">{{ post.mustLogInVote }}</small>
     </div>
     <a ng-href="{{ post.image_url }}"><div class="col-sm-5" ng-style=" {'background-image': 'URL({{ post.image_url }})', 'background-repeat': 'no-repeat', 'border': '1px solid #9098A1', 'background-size': 'cover', 'height': '238px', 'top': '-1px'  }"></div></a>
     <section class="col-sm-1 votes">
