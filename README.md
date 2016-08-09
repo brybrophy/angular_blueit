@@ -1,5 +1,3 @@
-# Blueit - A Reddit clone written in Angular
+# Blueit - A Reddit clone written in Angular, Express, Node, and Postgresql.
 
-This assignment is divided into multiple parts.
-
-1. [Server Setup](1_server_setup.md)
+Live version at brybrophy-blueit.herokuapp.com.
